@@ -6,16 +6,16 @@ A collection of agent skills that extend capabilities across planning, developme
 
 These skills help you think through problems before writing code.
 
-- **write-a-prd** — Create a PRD through an interactive interview, codebase exploration, and module design. Filed as a GitHub issue.
+- **to-prd** — Turn the current conversation context into a PRD and submit it as a GitHub issue. No interview — just synthesizes what you've already discussed.
 
   ```
-  npx skills@latest add mattpocock/skills/write-a-prd
+  npx skills@latest add mattpocock/skills/to-prd
   ```
 
-- **prd-to-issues** — Break a PRD into independently-grabbable GitHub issues using vertical slices.
+- **to-issues** — Break any plan, spec, or PRD into independently-grabbable GitHub issues using vertical slices.
 
   ```
-  npx skills@latest add mattpocock/skills/prd-to-issues
+  npx skills@latest add mattpocock/skills/to-issues
   ```
 
 - **grill-me** — Get relentlessly interviewed about a plan or design until every branch of the decision tree is resolved.
