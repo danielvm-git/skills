@@ -97,13 +97,13 @@ Tell the maintainer:
 Then wait for the maintainer's direction. They may:
 
 - Agree and ask you to apply labels → do it
-- Want to flesh it out → start a grilling session
+- Want to flesh it out → start a /domain-model session
 - Override with a different state → apply their choice
 - Want to discuss → have a conversation
 
 ### Step 3: Bug reproduction (bugs only)
 
-If the issue is categorized as a bug, attempt to reproduce it before starting a grilling session. This will vary by codebase, but do your best:
+If the issue is categorized as a bug, attempt to reproduce it before starting a /domain-model session. This will vary by codebase, but do your best:
 
 - Read the reporter's reproduction steps (if provided)
 - Explore the codebase to understand the relevant code paths
@@ -112,11 +112,11 @@ If the issue is categorized as a bug, attempt to reproduce it before starting a 
 - If reproduction fails, report that too — the bug may be environment-specific, already fixed, or the report may be inaccurate
 - If the report lacks enough detail to attempt reproduction, note that — this is a strong signal the issue should move to `needs-info`
 
-The reproduction attempt informs the grilling session and the agent brief. A confirmed reproduction with a known code path makes for a much stronger brief.
+The reproduction attempt informs the /domain-model session and the agent brief. A confirmed reproduction with a known code path makes for a much stronger brief.
 
-### Step 4: Grilling session (if needed)
+### Step 4: /domain-model session (if needed)
 
-If the issue needs to be fleshed out before it's ready for an agent, interview the maintainer to build a complete specification.
+If the issue needs to be fleshed out before it's ready for an agent, interview the maintainer to build a complete specification. Use the /domain-model skill.
 
 ### Step 5: Apply the outcome
 
@@ -133,13 +133,13 @@ Depending on the outcome:
 
 When the maintainer explicitly tells you to move an issue to a specific state (e.g. "move #42 to ready-for-agent"), trust their judgment and apply the label directly.
 
-Still show a confirmation of what you're about to do: which labels will be added/removed, and whether you'll post a comment or close the issue. But skip the grilling session entirely.
+Still show a confirmation of what you're about to do: which labels will be added/removed, and whether you'll post a comment or close the issue. But skip the /domain-model session entirely.
 
-If moving to `ready-for-agent` without a grilling session, ask the maintainer if they want to write a brief agent brief comment or skip it.
+If moving to `ready-for-agent` without a /domain-model session, ask the maintainer if they want to write a brief agent brief comment or skip it.
 
 ## Needs Info Output
 
-When moving an issue to `needs-info`, post a comment that captures the grilling progress and tells the reporter what's needed:
+When moving an issue to `needs-info`, post a comment that captures the interview progress and tells the reporter what's needed:
 
 ```markdown
 ## Triage Notes
@@ -155,7 +155,7 @@ When moving an issue to `needs-info`, post a comment that captures the grilling 
 - question 2
 ```
 
-Include everything resolved during the grilling session in "established so far" — this work should not be lost. The questions for the reporter should be specific and actionable, not vague ("please provide more info").
+Include everything resolved during the /domain-model session in "established so far" — this work should not be lost. The questions for the reporter should be specific and actionable, not vague ("please provide more info").
 
 ## Resuming Previous Sessions
 
@@ -165,4 +165,4 @@ When triaging an issue that already has triage notes from a previous session:
 2. Parse what was already established
 3. Check if the reporter has answered any outstanding questions
 4. Present the maintainer with an updated picture: "Here's where we left off, and here's what the reporter has said since"
-5. Continue the grilling from where it stopped — do not re-ask resolved questions
+5. Continue the /domain-model session from where it stopped — do not re-ask resolved questions
