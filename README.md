@@ -23,6 +23,13 @@ npx skills@latest add OWNER/skills -g -a cursor -y --skill '*'
 ```
 
 - **Global (`-g`)** installs to **`~/.cursor/skills`**, one directory per skill (for example `~/.cursor/skills/tdd/SKILL.md`). This matches a machine-wide setup similar to the shell script in this repository.
+
+**Install for the current project only** (no `-g`; skills live under the CLI’s project path—often **`.agents/skills/`** per upstream, not your home directory):
+
+```sh
+cd /path/to/your-app
+npx skills@latest add OWNER/skills -a cursor -y --skill '*'
+```
 - **Install specific skills only:** add `--skill name` (repeat or see upstream docs). Use a quoted `'*'` to mean all skills, as in the one-liner above.
 - If **symlinks** are a problem on your system, add **`--copy`** to the same command so files are copied instead of linked.
 - If the agent does not pick up changes, start a new chat or reload the window.
@@ -53,7 +60,14 @@ npx skills@latest add danielvm-git/skills -g -a cursor -y --skill '*'
 
 ## Install with the shell script (no npx)
 
-If you prefer not to use Node, or you want a straight **rsync** from a local tree into `~/.cursor/skills`, use [`scripts/install-cursor-skills.sh`](scripts/install-cursor-skills.sh) from a clone or archive of this repository.
+If you prefer not to use Node, or you want a straight **rsync** from a local tree, use the scripts in [`scripts/`](scripts/) from a clone or archive of this repository.
+
+| Script | Installs to | Use when |
+| ------ | ------------ | -------- |
+| [`install-cursor-skills.sh`](scripts/install-cursor-skills.sh) | **`~/.cursor/skills`** (global) | You want the same skills in Cursor for every project on this machine. |
+| [`install-cursor-skills-local.sh`](scripts/install-cursor-skills-local.sh) | **`<project>/.cursor/skills`** (per repo) | You want skills only in one checkout (e.g. to commit under that app or a team template). Optional first argument: install root; default is the current directory. |
+
+Both read skill folders from this skills repo unless you set **`SOURCE_DIR`**. Set **`TARGET_DIR`** to override the destination entirely.
 
 ### Without cloning
 
@@ -63,7 +77,10 @@ Download a **snapshot** of the default branch, extract, and run the script. GitH
 curl -L https://github.com/OWNER/skills/archive/refs/heads/main.tar.gz -o skills.tar.gz
 tar -xzf skills.tar.gz
 cd skills-main
+# Global (~/.cursor/skills):
 ./scripts/install-cursor-skills.sh
+# Or local (./.cursor/skills in the directory you name; often run from the app project):
+# ./scripts/install-cursor-skills-local.sh /path/to/your-app
 ```
 
 **ZIP (e.g. Windows):** `https://github.com/OWNER/skills/archive/refs/heads/main.zip` — unzip, `cd` into `skills-main`, then run the script.
@@ -76,22 +93,34 @@ cd skills-main
 git clone --depth 1 https://github.com/OWNER/skills.git
 cd skills
 ./scripts/install-cursor-skills.sh
+# Local install into another project (example):
+# ./scripts/install-cursor-skills-local.sh /path/to/your-app
 ```
 
-**Updates:** `git pull` in the clone, then `./scripts/install-cursor-skills.sh` again.
+**Updates:** `git pull` in the clone, then run the same script you use (`install-cursor-skills.sh` or `install-cursor-skills-local.sh`) again.
 
 ### Script options
 
-By default, skills are written to **`~/.cursor/skills`**, and re-runs **overwrite** the same paths.
+- **Global script:** by default, skills are written to **`~/.cursor/skills`**.
+- **Local script:** by default, skills are written to **`<install-root>/.cursor/skills`** (install root is the first argument, or the current working directory).
 
-| Variable     | Default              | Purpose                                     |
-| ------------ | -------------------- | -------------------------------------------- |
-| `SOURCE_DIR` | Root of the tree     | Where to read skill folders from             |
-| `TARGET_DIR` | `~/.cursor/skills`  | Where Cursor should find installed skills   |
+Re-runs **overwrite** the same paths. Override sources and destinations with:
+
+| Variable     | Default (global script)   | Default (local script)              |
+| ------------ | ------------------------- | ----------------------------------- |
+| `SOURCE_DIR` | Root of this skills clone | Root of this skills clone           |
+| `TARGET_DIR` | `~/.cursor/skills`        | `<install-root>/.cursor/skills`     |
 
 ```sh
 SOURCE_DIR=/path/to/skills-main ./scripts/install-cursor-skills.sh
+# Force a custom project path (either script):
 TARGET_DIR=/path/to/your-project/.cursor/skills ./scripts/install-cursor-skills.sh
+```
+
+```sh
+# From the skills repo, install into another checkout’s .cursor/skills
+./scripts/install-cursor-skills-local.sh /path/to/your-app
+cd /path/to/your-app && /path/to/skills/scripts/install-cursor-skills-local.sh
 ```
 
 ## Planning and design
@@ -135,4 +164,4 @@ TARGET_DIR=/path/to/your-project/.cursor/skills ./scripts/install-cursor-skills.
 
 ## Repository layout
 
-Each skill is a **top-level directory** in this repo containing **`SKILL.md`**. The install script only syncs those directories; hidden top-level directories (names starting with `.`) are skipped. The `npx skills` CLI discovers the same set of skills from GitHub (recursive search for valid `SKILL.md` files).
+Each skill is a **top-level directory** in this repo containing **`SKILL.md`**. The install scripts only sync those directories; hidden top-level directories (names starting with `.`) are skipped. The `npx skills` CLI discovers the same set of skills from GitHub (recursive search for valid `SKILL.md` files).
