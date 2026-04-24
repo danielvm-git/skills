@@ -1,6 +1,6 @@
 ---
 name: fix-and-report
-description: End-to-end bug fix workflow: triage, diagnose root cause, implement TDD fix, prevent recurrence, and report to GitHub. Use when user reports a bug, pastes an error, or wants a disciplined fix with GitHub tracking.
+description: End-to-end bug fix workflow covering triage, diagnosis, TDD implementation, and GitHub reporting. Use when fixing bugs with GitHub tracking.
 ---
 
 # Fix and Report
