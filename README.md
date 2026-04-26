@@ -1,8 +1,14 @@
 # Agent Skills
 
-A collection of agent skills (each folder has a `SKILL.md`) for planning, development, and tooling. This **GitHub repository** is the source for the skill content; the recommended way to install it into [Cursor](https://cursor.com) for yourself and your team is the open **`npx skills`** CLI (see below). This repo is **not** published to npm as its own package.
+**What this is:** a public **catalog of agent skills**—folders with a `SKILL.md` (YAML frontmatter + instructions) that [Cursor](https://cursor.com) and other agents can load for planning, development, and tooling workflows.
 
-**GitHub address:** use `https://github.com/OWNER/skills` where `OWNER` is your org or user (this project’s public remote is `danielvm-git/skills`—swap in your fork if you use one).
+**Who it is for:** developers and teams who want copy-paste installs of shared agent behavior, plus contributors adding or refining skills.
+
+**How you use it:** install skills into your machine or app repo with the **`npx skills`** CLI (recommended) or the Bash scripts under [`scripts/`](scripts/). This repository is the **Git** source of truth; it is **not** published as its own package on npm.
+
+**Brownfield / AI context:** a machine-oriented overview of this repo lives in [`docs/index.md`](docs/index.md) (generated documentation for planning workflows).
+
+**GitHub:** [https://github.com/danielvm-git/skills](https://github.com/danielvm-git/skills). In the commands below, `npx skills` takes the shorthand **`danielvm-git/skills`** (user-or-org + repo). If you use a fork, substitute your GitHub user or org for `danielvm-git`.
 
 ## Install with npx (team, Cursor)
 
@@ -13,13 +19,13 @@ The [`skills` package on npm](https://www.npmjs.com/package/skills) is a **third
 **Preview skills without installing** (clone is temporary; nothing is written to your agent dirs beyond the CLI’s cache):
 
 ```sh
-npx skills@latest add OWNER/skills --list
+npx skills@latest add danielvm-git/skills --list
 ```
 
-**Install all skills for Cursor, globally, without prompts** (typical one-liner for teammates—replace `OWNER`):
+**Install all skills for Cursor, globally, without prompts** (typical one-liner for teammates):
 
 ```sh
-npx skills@latest add OWNER/skills -g -a cursor -y --skill '*'
+npx skills@latest add danielvm-git/skills -g -a cursor -y --skill '*'
 ```
 
 - **Global (`-g`)** installs to **`~/.cursor/skills`**, one directory per skill (for example `~/.cursor/skills/tdd/SKILL.md`). This matches a machine-wide setup similar to the shell script in this repository.
@@ -28,7 +34,7 @@ npx skills@latest add OWNER/skills -g -a cursor -y --skill '*'
 
 ```sh
 cd /path/to/your-app
-npx skills@latest add OWNER/skills -a cursor -y --skill '*'
+npx skills@latest add danielvm-git/skills -a cursor -y --skill '*'
 ```
 - **Install specific skills only:** add `--skill name` (repeat or see upstream docs). Use a quoted `'*'` to mean all skills, as in the one-liner above.
 - If **symlinks** are a problem on your system, add **`--copy`** to the same command so files are copied instead of linked.
@@ -46,17 +52,31 @@ or run the `npx skills@latest add ...` command again.
 **Private GitHub repo:** use a full URL or ssh remote so git credentials apply, for example:
 
 ```sh
-npx skills@latest add https://github.com/ORG/skills
-npx skills@latest add git@github.com:ORG/skills.git
+npx skills@latest add https://github.com/danielvm-git/skills
+npx skills@latest add git@github.com:danielvm-git/skills.git
 ```
 
-**Project-scoped install (no `-g`)** install skills inside an application checkout (for committing them with a product repo). The upstream CLI places Cursor’s project skills under **`.agents/skills/`** for that run; see the [CLI README](https://github.com/MattCraftsCode/skills) for scope and flags.
+**Project-scoped install (no `-g`)** installs skills inside an application checkout (for committing them with a product repo). The upstream CLI places Cursor’s project skills under **`.agents/skills/`** for that run; see the [CLI README](https://github.com/MattCraftsCode/skills) for scope and flags.
 
-**Example** using the public `OWNER` for this collection:
+### List and install individual skills
+
+Preview which skills this repo exposes (nothing is written to your agent skill dirs beyond the CLI’s normal behavior for a dry listing):
 
 ```sh
-npx skills@latest add danielvm-git/skills -g -a cursor -y --skill '*'
+npx skills@latest add danielvm-git/skills --list
 ```
+
+Install **only** the skills you need—repeat `--skill` for each id (the `name:` field at the top of each skill’s `SKILL.md`):
+
+```sh
+npx skills@latest add danielvm-git/skills -g -a cursor -y --skill tdd --skill caveman --skill write-a-skill
+```
+
+If a skill name contains spaces, quote it, for example `--skill "Convex Best Practices"`.
+
+**Why `npx skills@latest`:** avoids a stale cached CLI version so your install matches current upstream behavior.
+
+**Sanity check after install:** open Cursor, start a **new** chat, and ask the agent to follow a skill you installed (for example the TDD or caveman workflow).
 
 ## Install with the shell script (no npx)
 
@@ -71,10 +91,10 @@ Both read skill folders from this skills repo unless you set **`SOURCE_DIR`**. S
 
 ### Without cloning
 
-Download a **snapshot** of the default branch, extract, and run the script. GitHub unpacks the archive into a folder named **`skills-main`** (branch `main` + repository name). Replace `OWNER` in the URL.
+Download a **snapshot** of the default branch, extract, and run the script. GitHub unpacks the archive into a folder named **`skills-main`** (branch `main` + repository name). For a fork, change the `danielvm-git` segment in the URL.
 
 ```sh
-curl -L https://github.com/OWNER/skills/archive/refs/heads/main.tar.gz -o skills.tar.gz
+curl -L https://github.com/danielvm-git/skills/archive/refs/heads/main.tar.gz -o skills.tar.gz
 tar -xzf skills.tar.gz
 cd skills-main
 # Global (~/.cursor/skills):
@@ -83,14 +103,14 @@ cd skills-main
 # ./scripts/install-cursor-skills-local.sh /path/to/your-app
 ```
 
-**ZIP (e.g. Windows):** `https://github.com/OWNER/skills/archive/refs/heads/main.zip` — unzip, `cd` into `skills-main`, then run the script.
+**ZIP (e.g. Windows):** `https://github.com/danielvm-git/skills/archive/refs/heads/main.zip` — unzip, `cd` into `skills-main`, then run the script.
 
 **Updates:** download and extract again, then re-run the script from the new tree.
 
 ### With git clone
 
 ```sh
-git clone --depth 1 https://github.com/OWNER/skills.git
+git clone --depth 1 https://github.com/danielvm-git/skills.git
 cd skills
 ./scripts/install-cursor-skills.sh
 # Local install into another project (example):
@@ -145,7 +165,7 @@ cd /path/to/your-app && /path/to/skills/scripts/install-cursor-skills-local.sh
 ## Tooling and setup
 
 - **setup-pre-commit** — Husky, lint-staged, Prettier, typecheck, and tests on commit.
-- **git-guardrails-claude-code** — Block dangerous git commands via hooks in Claude Code.
+- **git-guardrails** — Block dangerous git commands via hooks in Claude Code, Cursor, Gemini CLI; Antigravity deny-list notes.
 
 ## GitHub and QA
 
@@ -166,3 +186,12 @@ cd /path/to/your-app && /path/to/skills/scripts/install-cursor-skills-local.sh
 ## Repository layout
 
 Each skill is a **top-level directory** in this repo containing **`SKILL.md`**. The install scripts only sync those directories; hidden top-level directories (names starting with `.`) are skipped. The `npx skills` CLI discovers the same set of skills from GitHub (recursive search for valid `SKILL.md` files).
+
+## Further reading (READMEs and docs)
+
+Keeping the top of this file accurate for newcomers matters more than covering every edge case. Useful references:
+
+- [A Beginner’s Guide to writing a Kickass README](https://meakaakka.medium.com/a-beginners-guide-to-writing-a-kickass-readme-7ac01da88ab3) (why the first screenful counts)
+- [README driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html) (write the README before you lock the design)
+- [Basic writing and formatting on GitHub](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) (headings, lists, fenced code)
+- [art-of-readme](https://github.com/noffle/art-of-readme) — short guide to README quality for open source

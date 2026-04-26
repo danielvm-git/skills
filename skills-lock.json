@@ -1,6 +1,11 @@
 {
   "version": 1,
   "skills": {
+    "caveman": {
+      "source": "danielvm-git/skills",
+      "sourceType": "github",
+      "computedHash": "934433479903febc585bf6deb5f0cebc63137e3f86b7babe0aab1ecb94d6d7a4"
+    },
     "design-an-interface": {
       "source": "danielvm-git/skills",
       "sourceType": "github",
@@ -10,6 +15,21 @@
       "source": "danielvm-git/skills",
       "sourceType": "github",
       "computedHash": "a971b48051dc5f3d7093167ac68f285d77a6f7b23c90f3e95698d41640b10d73"
+    },
+    "edit-article": {
+      "source": "danielvm-git/skills",
+      "sourceType": "github",
+      "computedHash": "6d29872a4015fcbb4879fe1bddf1919995c477dcf7248885efb85722f50e6c4d"
+    },
+    "fix-report": {
+      "source": "danielvm-git/skills",
+      "sourceType": "github",
+      "computedHash": "18ab7d14dc8d98c5dd41f078746392c00650d95865f9b3fc68f3e78565be0ff3"
+    },
+    "git-guardrails": {
+      "source": "danielvm-git/skills",
+      "sourceType": "github",
+      "computedHash": "611393b0645fde7b03130636d67e0a8197cabcddd7b5cd5365b83fbd1b000a39"
     },
     "github-triage": {
       "source": "danielvm-git/skills",
@@ -25,6 +45,16 @@
       "source": "danielvm-git/skills",
       "sourceType": "github",
       "computedHash": "b627d5ecf36847d678b470aa87f46da602ee1013af8c97cd26ad4d005e59662d"
+    },
+    "migrate-to-shoehorn": {
+      "source": "danielvm-git/skills",
+      "sourceType": "github",
+      "computedHash": "8f1a623a019abca0ab5e22e8deaae375829368cc1344016010201cf650331d33"
+    },
+    "obsidian-vault": {
+      "source": "danielvm-git/skills",
+      "sourceType": "github",
+      "computedHash": "960437c7c2febc15cf9d49964f0c8bd889d90a56e81b6eaa33f3ac5b594291c3"
     },
     "qa": {
       "source": "danielvm-git/skills",
