@@ -166,6 +166,7 @@ cd /path/to/your-app && /path/to/skills/scripts/install-cursor-skills-local.sh
 
 - **setup-pre-commit** — Husky, lint-staged, Prettier, typecheck, and tests on commit.
 - **git-guardrails** — Block dangerous git commands via hooks in Claude Code, Cursor, Gemini CLI; Antigravity deny-list notes.
+- **prepare-semantic-commit** — Review working-tree and session changes; draft [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) messages and a [semantic-release](https://github.com/semantic-release/semantic-release)-style semver bump (patch / minor / major) before `git commit`.
 
 ## GitHub and QA
 

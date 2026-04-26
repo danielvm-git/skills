@@ -6,6 +6,11 @@
       "sourceType": "github",
       "computedHash": "934433479903febc585bf6deb5f0cebc63137e3f86b7babe0aab1ecb94d6d7a4"
     },
+    "clean-my-room": {
+      "source": "danielvm-git/skills",
+      "sourceType": "github",
+      "computedHash": "be560974fd57b17b87c14373d1c41910735ece2952aef1b31db63a7575da91e3"
+    },
     "design-an-interface": {
       "source": "danielvm-git/skills",
       "sourceType": "github",
@@ -29,7 +34,7 @@
     "git-guardrails": {
       "source": "danielvm-git/skills",
       "sourceType": "github",
-      "computedHash": "611393b0645fde7b03130636d67e0a8197cabcddd7b5cd5365b83fbd1b000a39"
+      "computedHash": "fff6d816ffd347c72af06f306b1fb0471c62be00600d41131381c84055656077"
     },
     "github-triage": {
       "source": "danielvm-git/skills",
@@ -55,6 +60,11 @@
       "source": "danielvm-git/skills",
       "sourceType": "github",
       "computedHash": "960437c7c2febc15cf9d49964f0c8bd889d90a56e81b6eaa33f3ac5b594291c3"
+    },
+    "prepare-semantic-commit": {
+      "source": "danielvm-git/skills",
+      "sourceType": "github",
+      "computedHash": "16ddca1e9e8542df3f2cda4274ca88c317f6b51185e2de5bed8d8720085f6e50"
     },
     "qa": {
       "source": "danielvm-git/skills",
