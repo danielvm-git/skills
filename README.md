@@ -1,198 +1,315 @@
-# Agent Skills
+# bigpowers
 
-**What this is:** a public **catalog of agent skills**—folders with a `SKILL.md` (YAML frontmatter + instructions) that [Cursor](https://cursor.com) and other agents can load for planning, development, and tooling workflows.
+**38 agent skills for spec-driven, TDD-first software by solo developers.**
 
-**Who it is for:** developers and teams who want copy-paste installs of shared agent behavior, plus contributors adding or refining skills.
+Every skill is a two-word verb-noun pair (Uncle Bob / Clean Code naming). Every skill that produces output writes to `specs/` at your project root — spec-driven development before any code is written.
 
-**How you use it:** install skills into your machine or app repo with the **`npx skills`** CLI (recommended) or the Bash scripts under [`scripts/`](scripts/). This repository is the **Git** source of truth; it is **not** published as its own package on npm.
+Works with: **Claude Code · Gemini CLI · Cursor · OpenCode**
 
-**Brownfield / AI context:** a machine-oriented overview of this repo lives in [`docs/index.md`](docs/index.md) (generated documentation for planning workflows).
+---
 
-**GitHub:** [https://github.com/danielvm-git/skills](https://github.com/danielvm-git/skills). In the commands below, `npx skills` takes the shorthand **`danielvm-git/skills`** (user-or-org + repo). If you use a fork, substitute your GitHub user or org for `danielvm-git`.
+## Lifecycle Workflow
 
-## Install with npx (team, Cursor)
+```mermaid
+sequenceDiagram
+    participant D as Developer
+    participant SK as Skill
+    participant Sp as specs/
+    participant G as Git / GitHub
 
-The [`skills` package on npm](https://www.npmjs.com/package/skills) is a **third-party** CLI that installs skills from a Git public repository into multiple coding agents, including Cursor. Project home: [MattCraftsCode/skills](https://github.com/MattCraftsCode/skills). You can also browse the ecosystem at [skills.sh](https://skills.sh).
+    Note over D,G: BOOTSTRAP (first time only)
+    D->>SK: using-bigpowers
+    SK-->>D: lifecycle overview + which skill to call first
 
-**Requirements:** [Node.js](https://nodejs.org/) (for `npx`) and a way to read this repo from GitHub (public `https` or authenticated `git` for private repos).
+    Note over D,G: DISCOVER
+    D->>SK: survey-context
+    SK->>Sp: reads specs/ if it exists
+    SK-->>D: phase map + next skill suggestion
 
-**Preview skills without installing** (clone is temporary; nothing is written to your agent dirs beyond the CLI’s cache):
+    D->>SK: elaborate-spec
+    SK-->>D: refined spec via dialogue (no files written)
 
-```sh
-npx skills@latest add danielvm-git/skills --list
+    Note over D,G: DESIGN
+    D->>SK: model-domain
+    SK->>Sp: specs/CONTEXT.md + specs/adr/*.md
+
+    D->>SK: define-language
+    SK->>Sp: specs/UBIQUITOUS_LANGUAGE.md
+
+    D->>SK: grill-me
+    SK-->>D: assumption challenges, one question at a time
+
+    D->>SK: deepen-architecture
+    SK->>Sp: updates specs/CONTEXT.md if new terms surface
+
+    D->>SK: design-interface
+    SK-->>D: API shape via parallel subagent proposals
+
+    Note over D,G: PLAN
+    D->>SK: scope-work
+    SK->>Sp: specs/SCOPE.md
+
+    D->>SK: slice-tasks
+    SK->>Sp: specs/TASKS.md
+
+    D->>SK: define-success
+    SK-->>D: step → verify pairs
+
+    D->>SK: plan-work
+    SK->>Sp: specs/PLAN.md (every step has verify: cmd)
+
+    Note over D,G: INITIATE
+    D->>SK: kickoff-branch
+    SK->>G: git worktree create + branch
+
+    D->>SK: guard-git
+    SK-->>D: destructive-git hook installed
+
+    D->>SK: hook-commits
+    SK-->>D: pre-commit hooks (lint, format, typecheck, test)
+
+    D->>SK: seed-conventions
+    SK->>Sp: creates specs/ directory
+    SK-->>D: CLAUDE.md + CONVENTIONS.md generated
+
+    Note over D,G: SPIKE (unknown domain)
+    D->>SK: spike-prototype
+    SK->>Sp: specs/SPIKE-name.md
+    SK-->>D: learnings feed back into plan-work
+
+    Note over D,G: EXECUTE
+    loop TDD cycle per behavior
+        D->>SK: develop-tdd
+        SK-->>D: red → green → refactor (vertical slice)
+        SK->>SK: enforce-first (F.I.R.S.T check)
+    end
+
+    alt one complex task with review gate
+        D->>SK: delegate-task
+        SK-->>D: subagent result + two-stage review
+    else independent parallel tasks
+        D->>SK: dispatch-agents
+        SK-->>D: all subagent results merged
+    else batch from PLAN.md
+        D->>SK: execute-plan
+        SK->>Sp: reads specs/PLAN.md
+        SK-->>D: checkpoint after each step
+    end
+
+    Note over D,G: HARDEN (any phase)
+    D->>SK: wire-observability
+    SK-->>D: structured JSON logging + idempotent setup scripts
+
+    Note over D,G: BUG
+    D->>SK: investigate-bug
+    SK->>Sp: specs/DIAGNOSIS.md
+
+    D->>SK: diagnose-root
+    SK-->>D: reproduce → isolate → hypothesize → verify
+
+    D->>SK: validate-fix
+    SK-->>D: re-run failing test + full suite + typecheck + lint
+    SK->>Sp: appends resolution to specs/DIAGNOSIS.md
+
+    Note over D,G: REVIEW
+    D->>SK: audit-code
+    SK-->>D: self-review checklist
+
+    D->>SK: request-review
+    SK-->>D: fresh reviewer agent report
+
+    D->>SK: respond-review
+    SK-->>D: must-fix / should-fix / consider + applied
+
+    Note over D,G: INTEGRATE
+    D->>SK: commit-message
+    SK-->>D: Conventional Commits message + semver bump
+
+    D->>SK: release-branch
+    SK->>G: gh pr create + worktree cleanup
+
+    Note over D,G: SUSTAIN
+    D->>SK: inspect-quality
+    SK->>Sp: specs/BUG-LOG.md (structured audit table)
+
+    D->>SK: organize-workspace
+    SK-->>D: classify → show → confirm → execute
 ```
 
-**Install all skills for Cursor, globally, without prompts** (typical one-liner for teammates):
+---
 
-```sh
-npx skills@latest add danielvm-git/skills -g -a cursor -y --skill '*'
+## Skill Index
+
+| Phase | Skill | What it does |
+|-------|-------|-------------|
+| Bootstrap | `using-bigpowers` | Lifecycle overview; where to start |
+| Discover | `survey-context` | Reads specs/, maps phase, suggests next skill |
+| Discover | `elaborate-spec` | Refines an idea via dialogue (no files written) |
+| Design | `model-domain` | Domain model → specs/CONTEXT.md + specs/adr/ |
+| Design | `define-language` | Ubiquitous language → specs/UBIQUITOUS_LANGUAGE.md |
+| Design | `grill-me` | Challenges assumptions one question at a time |
+| Design | `grill-with-docs` | grill-me grounded in real library/API docs |
+| Design | `deepen-architecture` | Architecture depth → updates specs/CONTEXT.md |
+| Design | `design-interface` | API shape via parallel subagent proposals |
+| Plan | `scope-work` | Feature scope → specs/SCOPE.md |
+| Plan | `slice-tasks` | Task breakdown → specs/TASKS.md |
+| Plan | `define-success` | Converts task to step → verify pairs |
+| Plan | `plan-work` | Implementation plan → specs/PLAN.md |
+| Plan | `plan-refactor` | Refactor plan → specs/REFACTOR.md |
+| Initiate | `kickoff-branch` | Creates git worktree + feature branch |
+| Initiate | `guard-git` | Installs destructive-git pre-command hook |
+| Initiate | `hook-commits` | Installs pre-commit (lint/format/typecheck/test) |
+| Initiate | `seed-conventions` | Generates CLAUDE.md + CONVENTIONS.md + specs/ |
+| Spike | `spike-prototype` | Throwaway spike → specs/SPIKE-name.md |
+| Execute | `develop-tdd` | Red → green → refactor, one behavior at a time |
+| Execute | `enforce-first` | F.I.R.S.T rubric check (sub-skill of develop-tdd) |
+| Execute | `delegate-task` | One subagent task with two-stage review |
+| Execute | `dispatch-agents` | Parallel independent subagents |
+| Execute | `execute-plan` | Runs specs/PLAN.md step by step |
+| Harden | `wire-observability` | Structured JSON logging + idempotent setup |
+| Bug | `investigate-bug` | Root cause investigation → specs/DIAGNOSIS.md |
+| Bug | `diagnose-root` | 4-phase: reproduce → isolate → hypothesize → verify |
+| Bug | `validate-fix` | Re-runs suite + typecheck + lint; updates DIAGNOSIS.md |
+| Review | `audit-code` | Self-review against CONVENTIONS.md + SOLID |
+| Review | `request-review` | Fresh reviewer agent with clean context |
+| Review | `respond-review` | Categorizes findings; applies must-fix |
+| Integrate | `commit-message` | Conventional Commits message + semver prediction |
+| Integrate | `release-branch` | gh pr create + coverage gates + worktree cleanup |
+| Sustain | `inspect-quality` | Structured audit → specs/BUG-LOG.md |
+| Sustain | `organize-workspace` | Classify → show → confirm → execute |
+| Utility | `terse-mode` | Token-saving fallback (context critically long) |
+| Utility | `craft-skill` | Build a new bigpowers skill |
+| Utility | `edit-document` | Restructure a doc in specs/ |
+
+---
+
+## Install
+
+### 1. Clone
+
+```bash
+git clone https://github.com/danielvm-git/skills ~/Developer/bigpowers
+cd ~/Developer/bigpowers
 ```
 
-- **Global (`-g`)** installs to **`~/.cursor/skills`**, one directory per skill (for example `~/.cursor/skills/tdd/SKILL.md`). This matches a machine-wide setup similar to the shell script in this repository.
+### 2. Generate tool artifacts
 
-**Install for the current project only** (no `-g`; skills live under the CLI’s project path—often **`.agents/skills/`** per upstream, not your home directory):
-
-```sh
-cd /path/to/your-app
-npx skills@latest add danielvm-git/skills -a cursor -y --skill '*'
-```
-- **Install specific skills only:** add `--skill name` (repeat or see upstream docs). Use a quoted `'*'` to mean all skills, as in the one-liner above.
-- If **symlinks** are a problem on your system, add **`--copy`** to the same command so files are copied instead of linked.
-- If the agent does not pick up changes, start a new chat or reload the window.
-
-**After this repo is updated on GitHub**, refresh installed skills with:
-
-```sh
-npx skills check
-npx skills update
+```bash
+./scripts/sync-skills.sh
 ```
 
-or run the `npx skills@latest add ...` command again.
+This generates `.cursor/rules/*.mdc` and `.gemini/extensions/bigpowers/` from the SKILL.md source files.
 
-**Private GitHub repo:** use a full URL or ssh remote so git credentials apply, for example:
+### 3. Install globally
 
-```sh
-npx skills@latest add https://github.com/danielvm-git/skills
-npx skills@latest add git@github.com:danielvm-git/skills.git
+```bash
+./scripts/install.sh
 ```
 
-**Project-scoped install (no `-g`)** installs skills inside an application checkout (for committing them with a product repo). The upstream CLI places Cursor’s project skills under **`.agents/skills/`** for that run; see the [CLI README](https://github.com/MattCraftsCode/skills) for scope and flags.
+What this does:
 
-### List and install individual skills
+| Tool | Install path | Mechanism |
+|------|-------------|-----------|
+| **Claude Code** | `~/.claude/skills/<name>/` | symlink per skill |
+| **Gemini CLI** | `~/.gemini/extensions/bigpowers/` | symlink to generated dir |
+| **Cursor** | `~/.cursor/rules/` | symlink to generated dir (see note) |
+| **OpenCode** | your project's `opencode.json` | manual (see below) |
 
-Preview which skills this repo exposes (nothing is written to your agent skill dirs beyond the CLI’s normal behavior for a dry listing):
+**Cursor note:** Cursor does not scan `~/.cursor/rules/` globally. For per-project access, run this once in your project root:
 
-```sh
-npx skills@latest add danielvm-git/skills --list
+```bash
+ln -sfn ~/Developer/bigpowers/.cursor/rules .cursor/rules
 ```
 
-Install **only** the skills you need—repeat `--skill` for each id (the `name:` field at the top of each skill’s `SKILL.md`):
+**OpenCode:** Add to your project's `opencode.json`:
 
-```sh
-npx skills@latest add danielvm-git/skills -g -a cursor -y --skill tdd --skill caveman --skill write-a-skill
+```json
+{
+  "rules": ["~/Developer/bigpowers/.cursor/rules/**/*.mdc"]
+}
 ```
 
-If a skill name contains spaces, quote it, for example `--skill "Convex Best Practices"`.
+Or symlink the same Cursor rules directory into your project (same command as above).
 
-**Why `npx skills@latest`:** avoids a stale cached CLI version so your install matches current upstream behavior.
+### 4. Preview before installing
 
-**Sanity check after install:** open Cursor, start a **new** chat, and ask the agent to follow a skill you installed (for example the TDD or caveman workflow).
-
-## Install with the shell script (no npx)
-
-If you prefer not to use Node, or you want a straight **rsync** from a local tree, use the scripts in [`scripts/`](scripts/) from a clone or archive of this repository.
-
-| Script | Installs to | Use when |
-| ------ | ------------ | -------- |
-| [`install-cursor-skills.sh`](scripts/install-cursor-skills.sh) | **`~/.cursor/skills`** (global) | You want the same skills in Cursor for every project on this machine. |
-| [`install-cursor-skills-local.sh`](scripts/install-cursor-skills-local.sh) | **`<project>/.cursor/skills`** (per repo) | You want skills only in one checkout (e.g. to commit under that app or a team template). Optional first argument: install root; default is the current directory. |
-
-Both read skill folders from this skills repo unless you set **`SOURCE_DIR`**. Set **`TARGET_DIR`** to override the destination entirely.
-
-### Without cloning
-
-Download a **snapshot** of the default branch, extract, and run the script. GitHub unpacks the archive into a folder named **`skills-main`** (branch `main` + repository name). For a fork, change the `danielvm-git` segment in the URL.
-
-```sh
-curl -L https://github.com/danielvm-git/skills/archive/refs/heads/main.tar.gz -o skills.tar.gz
-tar -xzf skills.tar.gz
-cd skills-main
-# Global (~/.cursor/skills):
-./scripts/install-cursor-skills.sh
-# Or local (./.cursor/skills in the directory you name; often run from the app project):
-# ./scripts/install-cursor-skills-local.sh /path/to/your-app
+```bash
+./scripts/install.sh --dry-run
 ```
 
-**ZIP (e.g. Windows):** `https://github.com/danielvm-git/skills/archive/refs/heads/main.zip` — unzip, `cd` into `skills-main`, then run the script.
+### 5. Uninstall
 
-**Updates:** download and extract again, then re-run the script from the new tree.
-
-### With git clone
-
-```sh
-git clone --depth 1 https://github.com/danielvm-git/skills.git
-cd skills
-./scripts/install-cursor-skills.sh
-# Local install into another project (example):
-# ./scripts/install-cursor-skills-local.sh /path/to/your-app
+```bash
+./scripts/install.sh --uninstall
 ```
 
-**Updates:** `git pull` in the clone, then run the same script you use (`install-cursor-skills.sh` or `install-cursor-skills-local.sh`) again.
+---
 
-### Script options
+## Update
 
-- **Global script:** by default, skills are written to **`~/.cursor/skills`**.
-- **Local script:** by default, skills are written to **`<install-root>/.cursor/skills`** (install root is the first argument, or the current working directory).
-
-Re-runs **overwrite** the same paths. Override sources and destinations with:
-
-| Variable     | Default (global script)   | Default (local script)              |
-| ------------ | ------------------------- | ----------------------------------- |
-| `SOURCE_DIR` | Root of this skills clone | Root of this skills clone           |
-| `TARGET_DIR` | `~/.cursor/skills`        | `<install-root>/.cursor/skills`     |
-
-```sh
-SOURCE_DIR=/path/to/skills-main ./scripts/install-cursor-skills.sh
-# Force a custom project path (either script):
-TARGET_DIR=/path/to/your-project/.cursor/skills ./scripts/install-cursor-skills.sh
+```bash
+git pull && ./scripts/sync-skills.sh
 ```
 
-```sh
-# From the skills repo, install into another checkout’s .cursor/skills
-./scripts/install-cursor-skills-local.sh /path/to/your-app
-cd /path/to/your-app && /path/to/skills/scripts/install-cursor-skills-local.sh
+That's it. Symlinks mean changes propagate to every tool automatically — no re-install needed.
+
+---
+
+## specs/ — Spec-Driven Development
+
+All skills write output to `specs/` at **your project root** (not this repo).
+
+| Document | Path |
+|----------|------|
+| Domain context + ADRs | `specs/CONTEXT.md` + `specs/adr/` |
+| Domain glossary | `specs/UBIQUITOUS_LANGUAGE.md` |
+| Scope definition | `specs/SCOPE.md` |
+| Task breakdown | `specs/TASKS.md` |
+| Implementation plan | `specs/PLAN.md` |
+| Refactor plan | `specs/REFACTOR.md` |
+| Spike learnings | `specs/SPIKE-<name>.md` |
+| Bug investigation | `specs/DIAGNOSIS.md` |
+| QA audit log | `specs/BUG-LOG.md` |
+
+Run `seed-conventions` to create the `specs/` directory and generate starter `CLAUDE.md` + `CONVENTIONS.md` files in a new project.
+
+---
+
+## Install artifacts
+
+The four AI config files at the repo root are **templates** — copy them into your project and fill in the placeholders:
+
+| File | Purpose |
+|------|---------|
+| `CLAUDE.md` | Claude Code project config (stack, commands, architecture) |
+| `GEMINI.md` | Gemini CLI project config (same structure) |
+| `AGENTS.md` | OpenAI Agents / Codex project config |
+| `CONVENTIONS.md` | Code, test, git, and specs/ conventions for all agents |
+
+---
+
+## Source of truth
+
+Each skill lives in its own directory as `SKILL.md`. Support docs (reference sheets, format templates, examples) live alongside it. `sync-skills.sh` concatenates everything and generates the Cursor and Gemini artifacts — you never edit `.cursor/rules/` or `.gemini/extensions/` by hand.
+
+```
+bigpowers/
+├── <skill-name>/
+│   ├── SKILL.md           ← source of truth
+│   └── *.md               ← optional support docs
+├── .cursor/rules/         ← generated by sync-skills.sh
+├── .gemini/extensions/bigpowers/
+│   ├── gemini_extension.yaml   ← generated
+│   └── commands/               ← generated
+├── scripts/
+│   ├── sync-skills.sh     ← generate Cursor + Gemini artifacts
+│   └── install.sh         ← global symlink install / uninstall
+├── CLAUDE.md / GEMINI.md / AGENTS.md / CONVENTIONS.md
+└── skills-lock.json
 ```
 
-## Planning and design
+---
 
-- **to-prd** — Turn the current conversation into a PRD and submit it as a GitHub issue.
-- **to-issues** — Break a plan, spec, or PRD into vertical-slice GitHub issues.
-- **grill-me** — Stress-test a plan or design through structured questioning.
-- **domain-model** — Stress-test a plan against the domain model and update `CONTEXT.md` / ADRs as you decide.
-- **design-an-interface** — Explore multiple interface designs for a module with parallel sub-agents.
-- **request-refactor-plan** — Build a small-commit refactor plan via interview, then file it as a GitHub issue.
-- **zoom-out** — Ask the agent to step up a level of abstraction and map modules and callers.
+## License
 
-## Development
-
-- **tdd** — Red–green–refactor and vertical slices.
-- **triage-issue** — Find root cause in the repo and file a GitHub issue with a TDD-oriented fix plan.
-- **fix-and-report** — End-to-end bug fix: triage, diagnose, implement TDD fix, and report to GitHub.
-- **improve-codebase-architecture** — Use `CONTEXT.md` and `docs/adr/` to find architectural improvements.
-- **migrate-to-shoehorn** — Move tests from `as` assertions to `@total-typescript/shoehorn`.
-- **scaffold-exercises** — Create exercise layouts with problems, solutions, and explainers.
-
-## Tooling and setup
-
-- **setup-pre-commit** — Husky, lint-staged, Prettier, typecheck, and tests on commit.
-- **git-guardrails** — Block dangerous git commands via hooks in Claude Code, Cursor, Gemini CLI; Antigravity deny-list notes.
-- **prepare-semantic-commit** — Review working-tree and session changes; draft [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) messages and a [semantic-release](https://github.com/semantic-release/semantic-release)-style semver bump (patch / minor / major) before `git commit`.
-
-## GitHub and QA
-
-- **github-triage** — Triage issues with a label-based workflow and `gh`.
-- **qa** — Conversational bug reports; agent explores the codebase and files GitHub issues.
-
-## Writing and knowledge
-
-- **write-a-skill** — Author new skills with structure and progressive disclosure.
-- **edit-article** — Revise articles for structure, clarity, and tone.
-- **ubiquitous-language** — Build a DDD-style glossary from the conversation.
-- **obsidian-vault** — Work with an Obsidian vault, wikilinks, and index notes.
-
-## Other
-
-- **caveman** — Ultra-compressed communication mode (invoked with user phrases like “caveman mode”).
-
-## Repository layout
-
-Each skill is a **top-level directory** in this repo containing **`SKILL.md`**. The install scripts only sync those directories; hidden top-level directories (names starting with `.`) are skipped. The `npx skills` CLI discovers the same set of skills from GitHub (recursive search for valid `SKILL.md` files).
-
-## Further reading (READMEs and docs)
-
-Keeping the top of this file accurate for newcomers matters more than covering every edge case. Useful references:
-
-- [A Beginner’s Guide to writing a Kickass README](https://meakaakka.medium.com/a-beginners-guide-to-writing-a-kickass-readme-7ac01da88ab3) (why the first screenful counts)
-- [README driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html) (write the README before you lock the design)
-- [Basic writing and formatting on GitHub](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) (headings, lists, fenced code)
-- [art-of-readme](https://github.com/noffle/art-of-readme) — short guide to README quality for open source
+MIT
