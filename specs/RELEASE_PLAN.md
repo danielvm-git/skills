@@ -2,7 +2,7 @@
 
 This document outlines the sequential strategy for building our model-judged compliance infrastructure and remediating codebase quality gaps.
 
-Current audit score: **75% (67/89)** — Claude-judged, 2026-05-18.
+Current audit score: **~84% (~75/89)** — estimated post-v1.12.1, Claude-judged, 2026-05-18.
 
 ## Release Sequence
 
@@ -12,8 +12,9 @@ Ordered by WSJF: (Business Value + Time Criticality + Risk Reduction) / Job Size
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **v1.11.0** | ✅ | — | Benchmarks | Define compliance reference features (Gherkin benchmarks) | Minor |
 | **v1.12.0** | ✅ | — | Auditor | Harden compliance harness + Clean Code Ch.17 remediation | Minor |
-| **v1.12.1** | ⏳ | 8.7 | Conventions | Harden CONVENTIONS.md: missing Ch.17 heuristics + test mandates | Patch |
-| **v1.13.0** | ⏳ | 7.3 | Harness | Falsification suites + `npm run compliance` integration | Minor |
+| **v1.12.1** | ✅ | 8.7 | Conventions | Harden CONVENTIONS.md: missing Ch.17 heuristics + test mandates | Patch |
+| **v1.13.0** | ✅ | 7.3 | Harness | Falsification suites + `npm run compliance` integration | Minor |
+| **v1.13.1** | ✅ | — | Skills | Fix execute-plan + plan-work: PLAN.md → RELEASE-PLAN.md | Patch |
 | **v1.14.0** | ⏳ | 5.0 | Karpathy | Behavioral mandates: ambiguity handling, loop-until-correct, pushback | Minor |
 | **v1.15.0** | ⏳ | 4.2 | Superpowers | Auto bootstrap, red-flag detection, quality threshold gate | Minor |
 | **v1.16.0** | ⏳ | 3.8 | Testing | F.I.R.S.T mandates: T4/T5/T8 explicit, Background: pre-conditions | Minor |
@@ -36,25 +37,26 @@ Ordered by WSJF: (Business Value + Time Criticality + Risk Reduction) / Job Size
 - Added `audit-code/HEURISTICS.md` and `references/` canonical Java examples.
 - Skill consolidation: plan-release, change-request, assess-impact, trace-requirement added; scope-work, slice-tasks, diagnose-root, grill-with-docs removed.
 
-### v1.12.1: CONVENTIONS.md Hardening (WSJF 8.7) ⏳
-*Audit gaps fixed: ~8 fails → passes. Highest score-per-effort of any remaining release.*
+### v1.12.1: CONVENTIONS.md Hardening (WSJF 8.7) ✅
+*Shipped a6bf36a. Estimated audit improvement: 75% → ~84%.*
 
-Missing from CONVENTIONS.md that features test directly:
-- **Boy Scout Rule**: mandate leaving every file touched at least as clean as found
-- **Exceptions over error codes**: mandate exceptions, prohibit numeric return codes for errors
-- **C5**: prohibit commented-out code (remove or delete, never comment out)
-- **G9 / F4**: mandate removal of dead code and unused functions
-- **G25**: prohibit magic strings and numbers; require named constants
-- **G28**: complex boolean logic must be encapsulated in named functions
-- **N7**: function names must describe side-effects (not just intent)
-- **T5**: boundary conditions must be exhaustively tested
-- **T8**: tests must verify behavior through public interfaces, not implementation details
-- **Verify mandate**: every change must be verifiable with a runnable command (move from plan-work into CONVENTIONS.md)
+Added to CONVENTIONS.md:
+- Boy Scout Rule, G25 (named constants), G28 (boolean predicates), N7 (side-effect names)
+- C5 (no commented-out code), G9/F4 (remove dead code), Exceptions over error codes
+- T5 (boundary conditions), T8 (public interfaces only), Verify mandate
 
-### v1.13.0: Harness Falsification + npm integration (WSJF 7.3) ⏳
-- Implement "Falsification" tests: intentionally broken scripts must trigger FAIL.
-- Add `npm run compliance` command in `package.json` for full harness invocation.
-- Add file-based caching to prevent redundant LLM calls on unchanged evidence.
+### v1.13.0: Harness Falsification + npm integration (WSJF 7.3) ✅
+*Shipped 501e98b.*
+
+- Added `npm run compliance` to `package.json` for one-command harness invocation.
+- Added `specs/audit/falsification/harness-falsification.feature` — intentional FAIL fixture.
+- Added `specs/audit/steps/then-this-step-always-fails.sh` — proves harness honours failures.
+- File-based caching deferred: risk of stale verdicts outweighs benefit at current volume.
+
+### v1.13.1: Skill correctness fix ✅
+*Shipped d125789.*
+
+- `execute-plan` and `plan-work` referenced non-existent `specs/PLAN.md`; corrected to `specs/RELEASE-PLAN.md` throughout.
 
 ### v1.14.0: Karpathy Behavioral Mandates (WSJF 5.0) ⏳
 *Audit gaps fixed: 3 karpathy.feature fails.*
@@ -87,7 +89,7 @@ Missing from CONVENTIONS.md that features test directly:
 - **Issue tracker**: add `to-issues` skill to push specs/TASKS.md or RELEASE-PLAN.md stories to GitHub Issues.
 
 ### v1.19.0: Taxonomy Metadata (WSJF 2.1) ⏳
-- Add `type:` (feat/fix/refactor) and `context:` (domain/infra) metadata fields to `specs/PLAN.md` and `specs/RELEASE-PLAN.md` templates.
+- Add `type:` (feat/fix/refactor) and `context:` (domain/infra) metadata fields to `specs/RELEASE-PLAN.md` templates.
 - Provenance links: formalize ADR + commit SHA linkage in all plan artifacts.
 
 ### v1.20.0: Architectural Complexity (WSJF 1.8) ⏳
