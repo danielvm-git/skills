@@ -49,6 +49,8 @@ Every skill that produces written output writes to `specs/` at the project root:
 - Types: explicit. No `any`, no untyped public functions.
 - No code duplication. Extract shared logic into a function/module.
 - Early returns over nested ifs. Max 2 levels of indentation.
+- Conditionals: expressed as positives (G29). Avoid negative flags or `unless` logic where possible.
+- The Stepdown Rule (G34): functions should descend exactly one level of abstraction.
 - Exception messages must include the offending value, expected shape, and an actionable remediation hint for the agent.
 - SOLID beyond SRP: favor interfaces over concrete types (DIP) when injecting dependencies.
 

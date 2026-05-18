@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Release Roadmap</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --primary-color: #38bdf8;
+            --success-color: #22c55e;
+            --pending-color: #94a3b8;
+            --progress-color: #fbbf24;
+            --card-bg: #1e293b;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+        }
+        .roadmap {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .release-card {
+            background-color: var(--card-bg);
+            border-left: 5px solid var(--pending-color);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .release-card.done {
+            border-left-color: var(--success-color);
+        }
+        .release-card.in-progress {
+            border-left-color: var(--progress-color);
+        }
+        .release-info {
+            flex-grow: 1;
+        }
+        .release-version {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        .release-desc {
+            font-size: 0.9em;
+            color: #94a3b8;
+        }
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 9999px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .status-badge.done {
+            background-color: rgba(34, 197, 94, 0.2);
+            color: var(--success-color);
+        }
+        .status-badge.pending {
+            background-color: rgba(148, 163, 184, 0.2);
+            color: var(--pending-color);
+        }
+        .status-badge.in-progress {
+            background-color: rgba(251, 191, 36, 0.2);
+            color: var(--progress-color);
+        }
+    </style>
+</head>
+<body>
+    <h1>Bigpowers Release Roadmap</h1>
+    <div class="roadmap">
+        <div class="release-card done">
+            <div class="release-info">
+                <div class="release-version">v1.1.0</div>
+                <div class="release-desc">Enforce Conventional Commits and SemVer</div>
+            </div>
+            <div class="status-badge done">Done</div>
+        </div>
+        <div class="release-card done">
+            <div class="release-info">
+                <div class="release-version">v1.2.0</div>
+                <div class="release-desc">Introduce map-codebase skill</div>
+            </div>
+            <div class="status-badge done">Done</div>
+        </div>
+        <div class="release-card done">
+            <div class="release-info">
+                <div class="release-version">v1.3.0</div>
+                <div class="release-desc">Introduce session-state and harden gates</div>
+            </div>
+            <div class="status-badge done">Done</div>
+        </div>
+        <div class="release-card done">
+            <div class="release-info">
+                <div class="release-version">v1.4.0</div>
+                <div class="release-desc">PreToolUse hook for Conventional Commits</div>
+            </div>
+            <div class="status-badge done">Done</div>
+        </div>
+        <div class="release-card done">
+            <div class="release-info">
+                <div class="release-version">v1.5.0</div>
+                <div class="release-desc">Implement HARD-GATE callout blocks</div>
+            </div>
+            <div class="status-badge done">Done</div>
+        </div>
+        <div class="release-card done">
+            <div class="release-info">
+                <div class="release-version">v1.6.0</div>
+                <div class="release-desc">Bake 'Commit-on-Green' into TDD loop</div>
+            </div>
+            <div class="status-badge done">Done</div>
+        </div>
+        <div class="release-card done">
+            <div class="release-info">
+                <div class="release-version">v1.7.0</div>
+                <div class="release-desc">Append 'red flags' table to TDD</div>
+            </div>
+            <div class="status-badge done">Done</div>
+        </div>
+        <div class="release-card done">
+            <div class="release-info">
+                <div class="release-version">v1.8.0</div>
+                <div class="release-desc">Sync git branch/hash in specs/STATE.md</div>
+            </div>
+            <div class="status-badge done">Done</div>
+        </div>
+        <div class="release-card done">
+            <div class="release-info">
+                <div class="release-version">v1.9.0</div>
+                <div class="release-desc">Harden git-worktree lifecycle</div>
+            </div>
+            <div class="status-badge done">Done</div>
+        </div>
+        <div class="release-card done">
+            <div class="release-info">
+                <div class="release-version">v1.10.0</div>
+                <div class="release-desc">Implement agentic gherkin compliance harness</div>
+            </div>
+            <div class="status-badge done">Done</div>
+        </div>
+        <div class="release-card in-progress">
+            <div class="release-info">
+                <div class="release-version">v1.11.0</div>
+                <div class="release-desc">Define reference features</div>
+            </div>
+            <div class="status-badge in-progress">In Progress</div>
+        </div>
+        <div class="release-card">
+            <div class="release-info">
+                <div class="release-version">v1.12.0</div>
+                <div class="release-desc">"Think Before Coding" Gate</div>
+            </div>
+            <div class="status-badge pending">Pending</div>
+        </div>
+    </div>
+</body>
+</html>

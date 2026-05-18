@@ -43,20 +43,22 @@ Run this self-review before asking anyone else to look at the code. The goal is 
 - [ ] Tests verify behavior through public interfaces (not implementation details)
 - [ ] Tests are F.I.R.S.T compliant (use `enforce-first` if unsure)
 
-### SOLID
+### SOLID and Heuristics
 
 - [ ] Single Responsibility: no function or module doing two unrelated things
 - [ ] Open/Closed: extended through interfaces, not by modifying stable code
 - [ ] Dependency Inversion: dependencies injected, not imported globally where avoidable
-- [ ] No `any` as a substitute for a proper interface
+- [ ] **Chapter 17 Heuristics**: Code is free of smells documented in `audit-code/HEURISTICS.md` (G, N, C, T)
 
 ### Code Style (CONVENTIONS.md)
 
 - [ ] Functions: 4–20 lines; split if longer
-- [ ] Files: under 500 lines (ideally 200–300)
+- [ ] Functions: descend exactly one level of abstraction (The Stepdown Rule / G34)
+- [ ] Files: under 300 lines (ideally 200–300)
 - [ ] Names: specific and unique (grep returns < 5 hits for each name)
-- [ ] No duplication — shared logic extracted
+- [ ] No duplication — shared logic extracted (DRY / G5)
 - [ ] Early returns over nested ifs; max 2 levels of indentation
+- [ ] Conditionals: expressed as positives (G29)
 - [ ] Comments explain WHY, not WHAT
 
 ### Agent Readability (Akita's Lens)

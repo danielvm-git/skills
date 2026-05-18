@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v1.11.0 Plan</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --primary-color: #38bdf8;
+            --card-bg: #1e293b;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+        }
+        .plan-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .step {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 2px solid var(--primary-color);
+        }
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .step-verify {
+            font-family: monospace;
+            background-color: #0f172a;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #22c55e;
+        }
+    </style>
+</head>
+<body>
+    <h1>v1.11.0: Compliance Reference Features</h1>
+    <div class="plan-container">
+        <div class="step">
+            <div class="step-title">1. Create Akita reference feature</div>
+            <div class="step-verify">verify: ls specs/audit/features/akita.feature</div>
+        </div>
+        <div class="step">
+            <div class="step-title">2. Create Karpathy reference feature</div>
+            <div class="step-verify">verify: ls specs/audit/features/karpathy.feature</div>
+        </div>
+        <div class="step">
+            <div class="step-title">3. Create Clean Code reference feature</div>
+            <div class="step-verify">verify: ls specs/audit/features/cleancode.feature</div>
+        </div>
+        <div class="step">
+            <div class="step-title">4. Create Pocock reference feature</div>
+            <div class="step-verify">verify: ls specs/audit/features/pocock.feature</div>
+        </div>
+        <div class="step">
+            <div class="step-title">5. Create BMAD reference feature</div>
+            <div class="step-verify">verify: ls specs/audit/features/bmad.feature</div>
+        </div>
+        <div class="step">
+            <div class="step-title">6. Create Superpowers reference feature</div>
+            <div class="step-verify">verify: ls specs/audit/features/superpowers.feature</div>
+        </div>
+        <div class="step">
+            <div class="step-title">7. Run baseline audit (The "Red" State)</div>
+            <div class="step-verify">verify: bash scripts/audit-compliance.sh ...</div>
+        </div>
+        <div class="step">
+            <div class="step-title">8. Update specs/STATE.md</div>
+            <div class="step-verify">verify: grep "v1.11.0" specs/STATE.md</div>
+        </div>
+    </div>
+</body>
+</html>

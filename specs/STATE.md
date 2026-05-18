@@ -17,8 +17,10 @@ Closing the "Meta-Task" loophole and restoring planning discipline after the v1.
 - [x] Implement v1.9.0 (Harden kickoff/release and cleanup script)
 - [x] Plan v1.11.0 (Compliance Reference Features)
 - [x] Implement v1.11.0 (Compliance Reference Features)
+- [x] Implement v1.12.0 (Clean Code Chapter 17 Remediation)
 
 ## Project Capabilities
+- **Remediated Clean Code References**: High-fidelity source code examples (ComparisonCompactor, DayDate) that resolve Chapter 17 smells.
 - **Gherkin Compliance Features**: Defined benchmarks for Akita, Karpathy, Clean Code, Pocock, BMAD, and Superpowers.
 - **Agentic Gherkin Compliance Harness**: Automated (agent-judged) auditing of skills against Gherkin feature files.
 - **Git-Worktree Lifecycle Hardening**: Robust kickoff/release and automated cleanup scripts.

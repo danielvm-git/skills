@@ -345,3 +345,13 @@ test("createUser makes user retrievable", async () => {
   expect(retrieved.name).toBe("Alice");
 });
 ```
+
+## Clean Test Heuristics (Uncle Bob, Ch 17)
+
+Apply these specific heuristics to maintain a high-quality suite:
+
+- **T1: Insufficient Tests**: A test suite should test everything that could possibly break. Don't stop at "it seems to work."
+- **T4: Ignored Tests**: Never ignore a test without documenting the ambiguity. An ignored test is a silent warning of a gap in understanding.
+- **T5: Test Boundary Conditions**: Most bugs happen at the edges. Test the exact boundaries (e.g., empty strings, max integers, off-by-one indices).
+- **T6: Exhaustively Test Near Bugs**: Bugs congregate. If you find one, there are likely others nearby; test that area thoroughly.
+- **T9: Tests Should Be Fast**: Slow tests don't get run. Keep them fast so they remain part of the core developer loop.
