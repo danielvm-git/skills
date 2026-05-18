@@ -16,6 +16,7 @@ All changes to this repository MUST follow the [Conventional Commits 1.0.0](http
 
 ## GitHub & Git Operations
 
+- No direct work on `main` or `master`. Every task MUST start with a feature branch or worktree via `kickoff-branch`.
 - Use `gh pr create` not `git push` + manual PR
 - Use `gh repo clone` not `git clone` for GitHub repos
 - Use `gh run view` / `gh run watch` for CI status

@@ -105,4 +105,4 @@ A numbered list of RED-GREEN cycles:
 
 </diagnosis-template>
 
-After writing `specs/DIAGNOSIS.md`, print a one-line summary of the root cause and suggest running `develop-tdd` next to implement the fix.
+After writing `specs/DIAGNOSIS.md`, print a one-line summary of the root cause and suggest running `kickoff-branch` next to create a fix branch.

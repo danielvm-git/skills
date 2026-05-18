@@ -72,4 +72,4 @@ Any further notes about the refactor.
 
 </refactor-plan-template>
 
-After writing `specs/REFACTOR.md`, suggest running `develop-tdd` to implement the first slice.
+After writing `specs/REFACTOR.md`, suggest running `kickoff-branch` next to create a refactor branch.

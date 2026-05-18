@@ -50,10 +50,10 @@ Based on what you've found, identify which PMBOK phase this project is currently
 |-------|---------|
 | **Discover** | No specs/ yet, or only rough notes |
 | **Design** | specs/SCOPE.md exists but no PLAN.md |
-| **Plan** | specs/TASKS.md exists; no branch started |
-| **Initiate** | On a feature branch; no PLAN.md yet |
-| **Execute** | PLAN.md exists; steps in progress |
-| **Bug** | DIAGNOSIS.md exists and is open |
+| **Plan** | specs/TASKS.md or PLAN.md exists; on `main`/`master` branch |
+| **Initiate** | On a feature branch; no code changes yet |
+| **Execute** | PLAN.md exists; on feature branch; steps in progress |
+| **Bug** | DIAGNOSIS.md exists; on `main`/`master` |
 | **Review** | All code written; no PR yet |
 | **Integrate** | PR open; tests passing |
 | **Sustain** | Ongoing; no active task |
@@ -62,14 +62,17 @@ Based on what you've found, identify which PMBOK phase this project is currently
 
 Based on the phase and state, recommend the most useful next step:
 
-```
-Phase: Execute
-Active branch: feature/user-auth
-PLAN.md: 3/7 steps complete
-Uncommitted changes: 2 files
+- **If in Plan/Bug phase and on `main`**: Suggest `kickoff-branch` next.
+- **If in Initiate phase**: Suggest `develop-tdd` or `execute-plan`.
+- **If in Execute phase**: Suggest `develop-tdd` (continue step X) or `execute-plan`.
 
-Suggested next: develop-tdd (continue step 4)
-Or: execute-plan (batch the remaining steps)
+Example:
+```
+Phase: Plan
+Active branch: main
+PLAN.md: exists
+
+Suggested next: kickoff-branch (to create feature/auth branch)
 ```
 
 Be specific — name the exact skill and why. If multiple options exist, list them in priority order.
