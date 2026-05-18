@@ -1,5 +1,19 @@
 # Conventions
 
+## Conventional Commits & Semantic Versioning
+
+All changes to this repository MUST follow the [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) specification. Versioning MUST strictly adhere to [Semantic Versioning 2.0.0](https://semver.org/).
+
+### Commit Message Format
+`<type>(<scope>): <description>` (Space after colon is MANDATORY)
+
+### Types & Version Bumps
+- `feat`: Minor (x.Y.z) - New feature
+- `fix`: Patch (x.y.Z) - Bug fix
+- `perf`: Patch (x.y.Z) - Performance improvement
+- `docs`, `chore`, `style`, `refactor`, `test`: No bump (unless breaking)
+- `BREAKING CHANGE:` (or `!` after type): Major (X.y.z)
+
 ## GitHub & Git Operations
 
 - Use `gh pr create` not `git push` + manual PR

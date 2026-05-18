@@ -1,0 +1,26 @@
+{
+  "name": "bigpowers",
+  "version": "1.0.0",
+  "description": "38+ agent skills for spec-driven, test-first software development by solo developers.",
+  "main": "index.js",
+  "scripts": {
+    "sync": "bash scripts/sync-skills.sh",
+    "install": "bash scripts/install.sh"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "skills",
+    "tdd",
+    "clean-code"
+  ],
+  "author": "danielvm",
+  "license": "MIT",
+  "devDependencies": {
+    "semantic-release": "^24.0.0",
+    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/release-notes-generator": "^14.0.0",
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/git": "^10.0.0"
+  }
+}
