@@ -8,6 +8,8 @@ alwaysApply: false
 
 Produce a detailed, verifiable implementation plan in `specs/PLAN.md`. Every step must be paired with a runnable verify command — "I think it works" is not a step.
 
+> **HARD GATE** — Do NOT proceed with a plan until the task's success criteria are clear. If success is ambiguous, run `define-success` first to convert the task into "step → verify: <cmd>" pairs.
+
 ## Pre-flight
 
 Before writing the plan, check if `define-success` has been run. If the task's success criteria are unclear, run `define-success` first to convert the task into "step → verify: <cmd>" pairs.

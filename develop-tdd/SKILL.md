@@ -5,6 +5,8 @@ description: Test-driven development with red-green-refactor loop using vertical
 
 # Develop TDD
 
+> **HARD GATE** — Do NOT write code before you have a plan. If you are starting a new task, run `plan-work` to create `specs/PLAN.md`. If you are fixing a bug, run `investigate-bug` to create `specs/DIAGNOSIS.md`.
+
 ## Philosophy
 
 **Core principle**: Tests should verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't.
@@ -38,6 +40,19 @@ RIGHT (vertical):
   RED→GREEN: test3→impl3
   ...
 ```
+
+## Red Flags
+
+If you find yourself thinking these things, you are likely deviating from production-grade craft. Stop and reconsider.
+
+| Red Flag | Reality |
+| :--- | :--- |
+| "This is too simple to need tests." | Simple code is where bugs hide. If it's simple, the test is cheap. |
+| "I'll refactor this later." | "Later" is when technical debt becomes a bankruptcy. Refactor while Green. |
+| "The tests are already comprehensive." | If you're adding behavior, you need a new test. Coverage != Correctness. |
+| "I'm just fixing a small bug." | Small bugs often indicate deep interface flaws. Investigate root cause. |
+| "I need to mock this internal class." | Mocking internals couples tests to implementation. Mock only I/O. |
+| "This refactor is out of scope." | Leave the code cleaner than you found it (Boy Scout Rule). |
 
 ## Workflow
 

@@ -3,6 +3,8 @@
 
 Execute the tasks in `specs/PLAN.md` one at a time, showing evidence after each step before proceeding.
 
+> **HARD GATE** — Do NOT execute a plan if `specs/PLAN.md` does not exist or if its steps lack runnable `verify:` commands. If the plan is missing or weak, run `plan-work` first.
+
 ## Process
 
 ### 1. Read the plan

@@ -23,16 +23,16 @@ This document outlines the sequential release strategy to address gaps identifie
 | :--- | :--- | :--- | :--- | :--- |
 | **v1.1.0** | ✅ | N/A | `feat(compliance): enforce Conventional Commits and SemVer in CONVENTIONS.md` | Minor |
 | **v1.2.0** | ✅ | GSD | `feat(survey): introduce map-codebase skill for high-fidelity surveying` | Minor |
-| **v1.3.0** | ⏳ | GSD | `feat(utility): introduce session-state skill to prevent context rot` | Minor |
-| **v1.4.0** | ⏳ | #1 | `feat(develop-tdd): add 'Think Before Coding' assumption-surfacing gate` | Minor |
-| **v1.5.0** | ⏳ | #2 | `feat(skills): implement HARD-GATE callout blocks for critical execution points` | Minor |
+| **v1.3.0** | ✅ | GSD | `feat(utility): introduce session-state and harden process gates` | Minor |
+| v1.4.0 | ⏳ | #1 | `feat(develop-tdd): add 'Think Before Coding' assumption-surfacing gate` | Minor |
+| **v1.5.0** | ✅ | #2 | `feat(skills): implement HARD-GATE callout blocks for critical execution points` | Minor |
 | **v1.6.0** | ⏳ | #3 | `feat(zoom-out): introduce zoom-out utility skill` | Minor |
-| **v1.7.0** | ⏳ | #4 | `feat(develop-tdd): append 'red flags' table for common agent rationalizations` | Minor |
+| **v1.7.0** | ✅ | #4 | `feat(develop-tdd): append 'red flags' table for common agent rationalizations` | Minor |
 | **v1.8.0** | ⏳ | #5 | `feat(terse-mode): extend terse-mode with caveman token-reduction rules` | Minor |
 | **v1.9.0** | ⏳ | #6 | `feat(audit-code): add 'Surgical Changes' diff check` | Minor |
 | **v1.10.0** | ⏳ | #7 | `feat(handoff): introduce handoff utility skill` | Minor |
 | **v1.11.0** | ⏳ | #8 | `feat(architecture): introduce improve-codebase-architecture sustain skill` | Minor |
-| **v1.12.0** | ⏳ | #9 | `feat(audit-code): integrate agent-readability lens checklist` | Minor |
+| **v1.12.0** | ✅ | #9 | `feat(audit-code): integrate agent-readability lens checklist` | Minor |
 | **v1.13.0** | ⏳ | #12 | `feat(audit-code): add Clean Code heuristics reference catalog` | Minor |
 | **v1.14.0** | ⏳ | #13 | `feat(integrations): introduce to-issues and triage skills for tracker sync` | Minor |
 
@@ -41,16 +41,19 @@ This document outlines the sequential release strategy to address gaps identifie
 ## Detailed Action Items per Release
 
 ### v1.1.0: Compliance Infrastructure
+- **Status:** ✅ Complete
 - **Target:** `CONVENTIONS.md`, `.releaserc.json` (New)
 - **Change:** Formally document the mandate for Conventional Commits and SemVer in `CONVENTIONS.md`. Create a `.releaserc.json` to automate versioning and changelog generation using `semantic-release`.
 
 ### v1.2.0: `map-codebase` Skill (GSD-inspired)
+- **Status:** ✅ Complete
 - **Target:** `map-codebase/SKILL.md` (New)
 - **Change:** Implement a high-fidelity surveying skill that analyzes stack, architecture, and gray areas (error handling, API shapes) and persists them into `specs/CONTEXT.md`. This goes beyond `survey-context` by identifying "signals" for planning.
 
-### v1.3.0: `session-state` Skill (GSD-inspired)
-- **Target:** `session-state/SKILL.md` (New), `specs/STATE.md` (New)
-- **Change:** Introduce a mechanism to track implementation decisions and progress in a structured `specs/STATE.md` file. This prevents "context rot" by ensuring decisions survive session boundaries and context window flushes.
+### v1.3.0: `session-state` and Hardening
+- **Status:** ✅ Complete
+- **Target:** `session-state/SKILL.md` (New), `specs/STATE.md` (New), various skill updates.
+- **Change:** Introduce a mechanism to track implementation decisions and progress in a structured `specs/STATE.md` file. Add HARD-GATE blocks to execution skills, "Red Flags" to `develop-tdd`, and "Agent Readability" to `audit-code`. (Covers gaps #2, #4, #9).
 
 ### v1.4.0: "Think Before Coding" Gate
 - **Target:** `develop-tdd/SKILL.md`
