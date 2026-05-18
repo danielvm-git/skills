@@ -5,6 +5,8 @@ description: Create a git worktree and feature branch, then verify a clean test 
 
 # Kickoff Branch
 
+> **HARD GATE** — Do NOT proceed with development until a clean test baseline is verified. If the current base branch is failing tests, stop and fix the baseline before creating a new worktree.
+
 Create an isolated working environment before touching any code. A clean baseline proves tests pass before you start — so any failure you see later was caused by your changes, not pre-existing issues.
 
 ## Process

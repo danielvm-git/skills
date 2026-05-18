@@ -5,6 +5,8 @@ description: Make the merge/PR/keep/discard decision for a feature branch, verif
 
 # Release Branch
 
+> **HARD GATE** — Do NOT merge or release if tests fail or if coverage gates are not met. If the branch is red, return to `develop-tdd` to fix regressions or add missing tests before proceeding.
+
 Finalize a completed feature branch: verify coverage gates, open a PR, and clean up the worktree.
 
 ## Process
