@@ -39,7 +39,14 @@ Implement the step using the appropriate approach:
 **c. Run the verify command**
 Every task in `specs/RELEASE-PLAN.md` must have a `verify: <cmd>`. Run it and show the output.
 
-**d. Checkpoint**
+**d. Log the decision**
+After verify passes, append to `specs/STATE.md` under `## Active Decisions`:
+```
+**Step N — [short name]**: [what approach was chosen and why — one sentence]
+```
+Only log if a non-obvious decision was made (approach chosen, constraint discovered, blocker resolved). Skip if the step was mechanical.
+
+**e. Checkpoint**
 Report the result and ask: "Step N complete. Proceed to step N+1?" (or proceed automatically if the user asked for fully autonomous execution)
 
 If verify fails:
