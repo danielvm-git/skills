@@ -1,6 +1,6 @@
 ---
 name: execute-plan
-description: Batch-execute tasks from specs/PLAN.md sequentially, with a human checkpoint after each step. Use when user has an approved plan and wants to execute it step-by-step with oversight, or mentions "execute the plan" or "run the plan".
+description: Batch-execute tasks from specs/RELEASE-PLAN.md sequentially, with a human checkpoint after each step. Use when user has an approved plan and wants to execute it step-by-step with oversight, or mentions "execute the plan" or "run the plan".
 ---
 
 # Execute Plan
@@ -49,12 +49,14 @@ If verify fails:
 - Loop on this step until the verify command is green
 - Only then proceed to the next step
 
+If verify passes but behavioral correctness is in doubt, do not advance — a mechanical green is not enough; confirm behavior is correct first.
+
 ### 3. Handle blockers
 
 If a step cannot be completed as written:
 - Report the blocker clearly
 - Ask the user whether to skip, adapt, or stop
-- Update `specs/PLAN.md` if the plan needs revision
+- Update `specs/RELEASE-PLAN.md` if the plan needs revision
 
 ### 4. Final report
 

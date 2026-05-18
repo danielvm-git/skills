@@ -45,12 +45,14 @@ If verify fails:
 - Loop on this step until the verify command is green
 - Only then proceed to the next step
 
+If verify passes but behavioral correctness is in doubt, do not advance — a mechanical green is not enough; confirm behavior is correct first.
+
 ### 3. Handle blockers
 
 If a step cannot be completed as written:
 - Report the blocker clearly
 - Ask the user whether to skip, adapt, or stop
-- Update `specs/PLAN.md` if the plan needs revision
+- Update `specs/RELEASE-PLAN.md` if the plan needs revision
 
 ### 4. Final report
 

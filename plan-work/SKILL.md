@@ -19,6 +19,8 @@ Read any existing `specs/` files: RELEASE-PLAN.md, SCOPE.md, TASKS.md, CONTEXT.m
 
 If this plan touches an existing module or symbol, run `assess-impact` first to understand the blast radius before writing steps.
 
+**Multiple interpretations**: if the task statement admits ≥2 valid interpretations, list them and get a decision from the user before drafting any steps.
+
 **Complexity pushback**: before writing any step that introduces a new abstraction (new class, interface, helper, layer), name the forcing function that justifies it. If you cannot name one, simplify — three similar lines beat a premature abstraction.
 
 ## Process
