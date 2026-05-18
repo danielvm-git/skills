@@ -8,7 +8,7 @@ Next up: v1.17.0 — Guardrails.
 ## Git Metadata
 
 - **Branch**: main
-- **Hash**: TBD (post-commit)
+- **Hash**: ba7d054
 
 ## Completed Releases
 
