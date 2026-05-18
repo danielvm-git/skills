@@ -2,7 +2,7 @@
 
 This document outlines the sequential strategy for building our model-judged compliance infrastructure and remediating codebase quality gaps.
 
-Current audit score: **~84% (~75/89)** — estimated post-v1.12.1, Claude-judged, 2026-05-18.
+Current audit score: **~87% (~77/89)** — estimated post-v1.14.0, Claude-judged, 2026-05-18.
 
 ## Release Sequence
 
@@ -15,7 +15,7 @@ Ordered by WSJF: (Business Value + Time Criticality + Risk Reduction) / Job Size
 | **v1.12.1** | ✅ | 8.7 | Conventions | Harden CONVENTIONS.md: missing Ch.17 heuristics + test mandates | Patch |
 | **v1.13.0** | ✅ | 7.3 | Harness | Falsification suites + `npm run compliance` integration | Minor |
 | **v1.13.1** | ✅ | — | Skills | Fix execute-plan + plan-work: PLAN.md → RELEASE-PLAN.md | Patch |
-| **v1.14.0** | ⏳ | 5.0 | Karpathy | Behavioral mandates: ambiguity handling, loop-until-correct, pushback | Minor |
+| **v1.14.0** | ✅ | 5.0 | Karpathy | Behavioral mandates: ambiguity handling, loop-until-correct, pushback | Minor |
 | **v1.15.0** | ⏳ | 4.2 | Superpowers | Auto bootstrap, red-flag detection, quality threshold gate | Minor |
 | **v1.16.0** | ⏳ | 3.8 | Testing | F.I.R.S.T mandates: T4/T5/T8 explicit, Background: pre-conditions | Minor |
 | **v1.17.0** | ⏳ | 3.2 | Guardrails | "Zoom-out" before modify + surgical-changes discipline | Minor |
@@ -58,12 +58,14 @@ Added to CONVENTIONS.md:
 
 - `execute-plan` and `plan-work` referenced non-existent `specs/PLAN.md`; corrected to `specs/RELEASE-PLAN.md` throughout.
 
-### v1.14.0: Karpathy Behavioral Mandates (WSJF 5.0) ⏳
-*Audit gaps fixed: 3 karpathy.feature fails.*
+### v1.14.0: Karpathy Behavioral Mandates (WSJF 5.0) ✅
+*Shipped 6207082. karpathy.feature: 0/10 → 10/10 PASS.*
 
-- **Multiple interpretations**: when a request is ambiguous, present ≥2 interpretations before proceeding — add to `elaborate-spec` and `plan-work` as a mandatory step.
-- **Loop-until-correct**: add explicit "loop until behavioral correctness is verified" discipline to `validate-fix` and `execute-plan`.
-- **Pushback on complexity**: add "complexity pushback" gate to `plan-work` — flag any plan step that introduces abstraction without a clear forcing function.
+- `elaborate-spec`: present ≥2 interpretations when request is ambiguous before proceeding.
+- `plan-work`: multiple interpretations gate in pre-flight; complexity pushback with forcing function.
+- `validate-fix`: loop-until-all-green rule — return to step 1 if any check fails.
+- `execute-plan`: behavioral correctness note — mechanical green ≠ behaviorally correct.
+- 10 evidence scripts added to `specs/audit/steps/` for karpathy.feature.
 
 ### v1.15.0: Superpowers Gates (WSJF 4.2) ⏳
 *Audit gaps fixed: 4 superpowers.feature fails.*
