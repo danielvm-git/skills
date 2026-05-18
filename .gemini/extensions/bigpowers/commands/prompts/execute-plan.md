@@ -39,10 +39,11 @@ Every task in `specs/RELEASE-PLAN.md` must have a `verify: <cmd>`. Run it and sh
 Report the result and ask: "Step N complete. Proceed to step N+1?" (or proceed automatically if the user asked for fully autonomous execution)
 
 If verify fails:
-- Do NOT move to the next step
+- Do NOT move to the next step — never advance on a red verify
 - Diagnose the failure
 - Fix it and re-run verify
-- Only proceed when green
+- Loop on this step until the verify command is green
+- Only then proceed to the next step
 
 ### 3. Handle blockers
 

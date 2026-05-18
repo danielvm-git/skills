@@ -37,6 +37,17 @@ Ask one question at a time. Work through these areas:
 - Any compatibility constraints (existing APIs, data formats)?
 - Any non-negotiable implementation decisions already made?
 
+### 2.5. Present multiple interpretations (if ambiguous)
+
+If the request is still ambiguous after step 2, do NOT guess — present ≥2 distinct interpretations:
+
+> "I see two ways to read this:
+> 1. [Interpretation A] — my recommendation because [reason]
+> 2. [Interpretation B]
+> Which is closer to what you mean?"
+
+Never proceed past this point with an unresolved ambiguity.
+
 ### 3. Surface hidden assumptions
 
 Once the user has answered the main questions, probe for assumptions:

@@ -87,5 +87,6 @@ Do not declare done without showing the terminal output. Print:
 - **Never use `@ts-ignore`, `as any`, or `// eslint-disable`** to "fix" a bug — these suppress the symptom without fixing the root cause
 - **Never mark the task done if any test is still failing**
 - **The verify command from specs/DIAGNOSIS.md or specs/PLAN.md must pass**
+- **Loop until all checks pass in the same pass**: if any checklist item fails, return to step 1 and run all checks again from the top — do not declare done until every item is green in a single uninterrupted run
 
 Suggest next skill: `audit-code` → `commit-message`.
