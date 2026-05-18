@@ -9,6 +9,8 @@ alwaysApply: false
 Produce a detailed, verifiable implementation plan in `specs/PLAN.md`. Every step must be paired with a runnable verify command — "I think it works" is not a step.
 
 > **HARD GATE** — Do NOT proceed with a plan until the task's success criteria are clear. If success is ambiguous, run `define-success` first to convert the task into "step → verify: <cmd>" pairs.
+>
+> **RECURSIVE DISCIPLINE** — This lifecycle apply to EVERY task, including updating these skills. Never skip planning because a task is "meta" or "just documentation."
 
 ## Pre-flight
 

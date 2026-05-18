@@ -7,6 +7,8 @@ description: "Test-driven development with red-green-refactor loop using vertica
 # Develop TDD
 
 > **HARD GATE** — Do NOT write code before you have a plan. If you are starting a new task, run `plan-work` to create `specs/PLAN.md`. If you are fixing a bug, run `investigate-bug` to create `specs/DIAGNOSIS.md`.
+>
+> **RECURSIVE DISCIPLINE** — This lifecycle apply to EVERY task, including updating these skills. Never skip planning because a task is "meta" or "just documentation."
 
 ## Philosophy
 
