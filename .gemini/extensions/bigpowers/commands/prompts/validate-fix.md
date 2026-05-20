@@ -71,18 +71,19 @@ If a `specs/DIAGNOSIS.md` exists for this bug, append the resolution:
 
 - [ ] specs/DIAGNOSIS.md updated with resolution
 
-### 7. Show evidence
+### 7. Behavioral Proof (HARD GATE)
 
-Do not declare done without showing the terminal output. Print:
-- The passing test output
-- The full suite result line (`X passed, 0 failed`)
-- The typecheck and lint exit codes
+Mechanical verification (tests passing) is only half the fix. You must prove **behavioral correctness**.
+
+- [ ] Manually demonstrate the fixed behavior (e.g., via `run_shell_command` or `web_fetch`)
+- [ ] Compare the output/state against the "Expected Behavior" in `specs/DIAGNOSIS.md`
+- [ ] Show the user evidence of the behavior, not just the test logs
 
 ## Rules
 
+- **Loop until behavioral correctness is verified**: if any checklist item fails, or if the behavior is still incorrect despite passing tests, return to step 1 and run all checks again from the top — do not declare done until every item is green and the behavior is proven correct in a single run.
 - **Never use `@ts-ignore`, `as any`, or `// eslint-disable`** to "fix" a bug — these suppress the symptom without fixing the root cause
 - **Never mark the task done if any test is still failing**
 - **The verify command from specs/DIAGNOSIS.md or specs/PLAN.md must pass**
-- **Loop until all checks pass in the same pass**: if any checklist item fails, return to step 1 and run all checks again from the top — do not declare done until every item is green in a single uninterrupted run
 
 Suggest next skill: `audit-code` → `commit-message`.

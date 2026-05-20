@@ -6,7 +6,8 @@
   "scripts": {
     "sync": "bash scripts/sync-skills.sh",
     "install": "bash scripts/install.sh",
-    "compliance": "bash scripts/audit-compliance.sh"
+    "compliance": "bash scripts/audit-compliance.sh specs/audit/features",
+    "compliance:gemini": "npm run compliance -- --judge gemini"
   },
   "keywords": [
     "ai",

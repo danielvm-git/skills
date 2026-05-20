@@ -26,9 +26,9 @@ Read any existing `specs/` files: RELEASE-PLAN.md, SCOPE.md, TASKS.md, CONTEXT.m
 
 If this plan touches an existing module or symbol, run `assess-impact` first to understand the blast radius before writing steps.
 
-**Multiple interpretations**: if the task statement admits ≥2 valid interpretations, list them and get a decision from the user before drafting any steps.
+> **MULTIPLE INTERPRETATIONS (HARD GATE)** — If the task statement admits ≥2 valid interpretations, you must list them and get a decision from the user before drafting any steps. Do not assume intent.
 
-**Complexity pushback**: before writing any step that introduces a new abstraction (new class, interface, helper, layer), name the forcing function that justifies it. If you cannot name one, simplify — three similar lines beat a premature abstraction.
+> **COMPLEXITY PUSHBACK (HARD GATE)** — Every step introducing a new abstraction (class, interface, helper, layer) MUST include a one-sentence "Reason for Depth": _"This abstraction is needed because [forcing function]..."_. If the sentence cannot be filled with a non-trivial reason, the abstraction is premature. Delete it and use inline code instead.
 
 ## Process
 

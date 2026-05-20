@@ -42,16 +42,15 @@ Ask one question at a time. Work through these areas:
 - Any compatibility constraints (existing APIs, data formats)?
 - Any non-negotiable implementation decisions already made?
 
-### 2.5. Present multiple interpretations (if ambiguous)
+### 2.5. Multiple Interpretations (HARD GATE)
 
-If the request is still ambiguous after step 2, do NOT guess — present ≥2 distinct interpretations:
+> **HARD GATE** — If the request admits ≥2 valid interpretations, do NOT guess. You must list them and ask the user to choose before proceeding. Proceeding with unresolved ambiguity is a failure of integrity.
 
+Present the options clearly:
 > "I see two ways to read this:
 > 1. [Interpretation A] — my recommendation because [reason]
 > 2. [Interpretation B]
 > Which is closer to what you mean?"
-
-Never proceed past this point with an unresolved ambiguity.
 
 ### 3. Surface hidden assumptions
 

@@ -2,6 +2,7 @@
 .agent
 .claude
 .openhands
+node_modules
 _bmad
 _bmad-outputspecs/audit/reports/
 

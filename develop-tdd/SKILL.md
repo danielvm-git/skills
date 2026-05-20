@@ -134,6 +134,7 @@ After every behavior cycle, run the verify command from `specs/PLAN.md` if one e
 [ ] Test would survive internal refactor
 [ ] Code is minimal for this test
 [ ] No speculative features added
+[ ] Every new abstraction has an explicit "Reason for Depth" justification
 [ ] Progress committed (Conventional Commits)
 [ ] verify: command passes
 ```
