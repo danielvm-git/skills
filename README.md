@@ -77,7 +77,7 @@ Every task in `bigpowers` follows a prescriptive 5-phase arc to ensure integrity
 
 | Level | Document | Responsibility |
 | :--- | :--- | :--- |
-| **Vision** | `PRINCIPLES.md` | Philosophical foundations and evolution. |
+| **Vision** | `docs/PRINCIPLES.md` | Philosophical foundations and evolution. |
 | **Context** | `specs/CONTEXT.md` | Tech stack, architecture, and glossary. |
 | **Scope** | `specs/SCOPE.md` | In-scope / out-of-scope and success criteria. |
 | **Decisions** | `specs/adr/` | Architectural Decision Records (irreversible choices). |
@@ -92,7 +92,7 @@ Every task in `bigpowers` follows a prescriptive 5-phase arc to ensure integrity
 
 - `scripts/`: Installation, syncing, and compliance tools.
 - `specs/`: The "Brain" of your project — all planning and decisions live here.
-- `references/`: Theoretical foundations (Uncle Bob, Ousterhout, Karpathy, etc.).
+- `docs/references/`: Theoretical foundations (Uncle Bob, Ousterhout, Karpathy, etc.).
 - `[skill-name]/`: Source files for each of the 44+ skills.
 
 ---

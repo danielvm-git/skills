@@ -4,8 +4,8 @@
 FAILS=0
 
 # Check java references
-if [[ -d "references" ]]; then
-  for f in references/*.java; do
+if [[ -d "docs/references" ]]; then
+  for f in docs/references/*.java; do
     # Simple check: ignore comments/imports, count actual code blocks
     # This is a complex check in bash, so we approximate with a warning
     : 

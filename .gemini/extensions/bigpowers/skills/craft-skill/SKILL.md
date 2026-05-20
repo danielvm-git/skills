@@ -15,7 +15,7 @@ description: "Create new bigpowers skills with proper structure, progressive dis
    - Any reference materials to include?
    - What specs/ output does it produce (if any)?
 
-2. **Verify Principles** — Ensure the skill aligns with [PRINCIPLES.md](../PRINCIPLES.md):
+2. **Verify Principles** — Ensure the skill aligns with [PRINCIPLES.md](../docs/PRINCIPLES.md):
    - Is it atomic (verb-noun)?
    - Is it "deep" (simple interface, complex internal logic)?
    - Does it include Hard Gates?

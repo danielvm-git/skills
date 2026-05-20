@@ -59,7 +59,7 @@ per philosophical pillar. Every scenario maps to a runnable step script.
 | 2026 | Akita | Agent-era re-rank: grep-ability, structured logging, token economy |
 | 2026 | BMAD / GSD | 5-phase lifecycle, prescriptive loop, wave execution |
 
-See `references/` for full source documents. See `PRINCIPLES.md` for the narrative arc.
+See `docs/references/` for full source documents. See `docs/PRINCIPLES.md` for the narrative arc.
 
 ---
 

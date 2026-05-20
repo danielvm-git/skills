@@ -19,7 +19,7 @@ Skills are assigned a model tier based on task complexity:
 | Standard | Sonnet | Code writing, research, planning | 200K |
 | Deep | Opus | Strategic planning, grill-me, ADR decisions | 250K |
 
-The assignment lives in `references/model-profiles.md`. Skills declare their tier in SKILL.md
+The assignment lives in `docs/references/model-profiles.md`. Skills declare their tier in SKILL.md
 frontmatter (future: `model: sonnet`). The orchestrator enforces the assignment.
 
 ## Consequences

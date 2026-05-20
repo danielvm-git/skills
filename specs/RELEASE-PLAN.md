@@ -45,14 +45,14 @@ audit tables). Zero risk (renames only), high payoff — unblocks everything dow
 
 ### v2.2.0: Supply-Chain Security (WSJF 4.2) 📋
 
-Closes documented drift: `references/security-threats.md` describes slopcheck but no skill
+Closes documented drift: `docs/references/security-threats.md` describes slopcheck but no skill
 implements it. Risk Reduction score is 9/10 — one supply-chain incident is a reputation kill.
 
 **Success Criteria:**
 - [ ] `plan-work` runs slopcheck for every external package and tags with `[OK]`, `[SUS]`, or `[SLOP]`.
 - [ ] `audit-code` includes a supply-chain checklist item (slopcheck verified?).
 - [ ] `[SUS]` and `[SLOP]` packages trigger a HARD GATE requiring human confirmation.
-- [ ] `references/security-threats.md` reflects actual implementation (no drift).
+- [ ] `docs/references/security-threats.md` reflects actual implementation (no drift).
 
 → verify: `grep -r "slopcheck" plan-work/SKILL.md audit-code/SKILL.md | wc -l | awk '{if($1>=2) print "OK"; else print "MISSING"}'`
 
