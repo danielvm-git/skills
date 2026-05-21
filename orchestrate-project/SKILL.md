@@ -36,8 +36,12 @@ See [REFERENCE.md](REFERENCE.md) for detailed phase specifications and gate type
 1. **Maintains STATE.md** — Tracks current phase, artifacts, decisions, risks.
 2. **Spawns appropriate skills** — Calls survey-context, elaborate-spec, plan-work, etc.
 3. **Enforces gates** — Hard stops if success criteria not met.
-4. **Pauses for confirmation** — After each phase, asks "Ready to proceed?".
-5. **Archives history** — Saves PLAN.md as specs/PLAN-vX.Y.Z.md.
+4. **The Gatekeeper** (v1.19.0) — Between every Story implementation in PHASE 4:
+   - READ `specs/RELEASE-PLAN.md` to verify completion.
+   - REQUIRE that the previous Story is marked `[x] Done`.
+   - REFUSE to call `update_topic` for a new Story until the previous one is physically evidenced as complete.
+5. **Pauses for confirmation** — After each phase, asks "Ready to proceed?".
+6. **Archives history** — Saves PLAN.md as specs/PLAN-vX.Y.Z.md.
 
 ## Orchestration Modes
 

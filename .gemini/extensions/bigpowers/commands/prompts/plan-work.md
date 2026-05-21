@@ -22,6 +22,12 @@ Read any existing `specs/` files: RELEASE-PLAN.md, SCOPE.md, TASKS.md, CONTEXT.m
 
 If this plan touches an existing module or symbol, run `assess-impact` first to understand the blast radius before writing steps.
 
+> **DISCOVERY MANDATE** (v1.18.0 Guardrails) — For any step involving external API integration (e.g., macOS CGEventTap, AWS SDK, Third-party libraries):
+> 1. You MUST perform a `google_web_search` or `grep_search` of local documentation to verify the API signature and constraints.
+> 2. You MUST quote at least one technical detail (method name, parameter, or error case) from your discovery in the step's context.
+> 
+> Plans that skip discovery for complex integrations are [SUS] and should be rejected.
+
 > **MULTIPLE INTERPRETATIONS (HARD GATE)** — If the task statement admits ≥2 valid interpretations, you must list them and get a decision from the user before drafting any steps. Do not assume intent.
 
 > **COMPLEXITY PUSHBACK (HARD GATE)** — Every step introducing a new abstraction (class, interface, helper, layer) MUST include a one-sentence "Reason for Depth": _"This abstraction is needed because [forcing function]..."_. If the sentence cannot be filled with a non-trivial reason, the abstraction is premature. Delete it and use inline code instead.

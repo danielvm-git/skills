@@ -108,7 +108,18 @@ Rules:
 - Keep tests focused on observable behavior
 - **Atomic Commits**: Commit after every GREEN phase to record progress and prevent large diffs.
 
-### 4. Refactor
+### 4. Visual Slices (UI Alternate Workflow)
+
+For UI components (SwiftUI, React, Flutter) where behavioral unit testing is brittle or low-signal:
+
+1. **Test-First Logic**: Extract logic (state transitions, formatting, validation) into a separate Controller, ViewModel, or Hook. This logic MUST follow pure TDD (Red-Green-Refactor).
+2. **Visual Verification**: For the View/Component itself, use "Visual Slices":
+   - **RED**: Write the component signature and a basic preview/test snapshot that fails (or displays placeholder).
+   - **GREEN**: Implement the UI and verify visually via manual run, preview, or snapshot test.
+   - **REFINE**: Adjust styling and layout until it matches the "rich aesthetics" requirement.
+3. **COMMIT**: git commit -m "feat(ui): <component name> visual slice verified"
+
+### 5. Refactor
 
 After all tests pass, look for [refactor candidates](refactoring.md):
 
