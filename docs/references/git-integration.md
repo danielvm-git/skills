@@ -49,8 +49,6 @@ This enables production-grade orchestration with hard gates,
 preventing scope creep and ensuring consistent quality.
 
 Fixes #456 (GitHub issue)
-
-Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>
 ```
 
 ---

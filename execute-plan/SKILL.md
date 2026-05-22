@@ -51,6 +51,13 @@ Only log if a non-obvious decision was made (approach chosen, constraint discove
 **e. Checkpoint**
 Report the result and ask: "Step N complete. Proceed to step N+1?" (or proceed automatically if the user asked for fully autonomous execution)
 
+**f. Story Verification (UAT)**
+After the last step of a Story is completed:
+1. Present the **Verification Script** from `specs/RELEASE-PLAN.md` for this story.
+2. Ask the user to perform the manual verification steps.
+3. Wait for the user to confirm "pass" or describe issues.
+4. If issues are reported, log them and stop execution for diagnosis.
+
 If verify fails:
 - Do NOT move to the next step — never advance on a red verify
 - Diagnose the failure

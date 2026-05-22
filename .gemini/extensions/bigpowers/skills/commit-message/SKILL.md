@@ -83,7 +83,6 @@ A breaking change can be signaled by:
 Footers follow the same `Token: value` pattern as Git Trailers. Common tokens:
 - `Refs: #123`
 - `See-also: docs/ADR-001.md`
-- `Co-authored-by: Name <email>`
 - `Signed-off-by: Name <email>`
 
 **Multi-line footers:** If a footer value spans multiple lines, each subsequent line must be indented.

@@ -21,6 +21,7 @@ All changes to this repository MUST follow the [Conventional Commits 1.0.0](http
 - Use `gh repo clone` not `git clone` for GitHub repos
 - Use `gh run view` / `gh run watch` for CI status
 - Verify auth with `gh auth status` before operations
+- **Git Attribution:** NEVER include `Co-authored-by`, `Co-Authored-By`, or any other footer that attributes code to an AI agent (e.g., Claude, Gemini). All commits must appear as if they were authored solely by the human user.
 - Never call GitHub REST API directly (curl, fetch, etc.)
 - Never create GitHub issues from automated workflows — produce local .md files in specs/ instead
 
@@ -34,6 +35,7 @@ You are operating within the `bigpowers` spec-driven development methodology.
   - Use `plan-work` to generate a verifiable plan in `specs/PLAN.md` before writing any feature code.
   - Use `develop-tdd` or `execute-plan` to implement the plan.
   - Use `investigate-bug` for bug reports before writing a fix.
+- **Verification Mandate:** Every story implementation MUST end with a step-by-step manual verification script provided to the user. You must wait for the user to confirm behavioral correctness (UAT) before declaring the story done or moving to the next.
 - **Verification:** You MUST verify every change with tests. Code generation without a corresponding plan in `specs/` is strictly forbidden.
 - **Stream Continuity:** When writing large files or long documents, you MUST output continuously in chunks of ~200 lines. Do not pause between sections. Continue immediately until complete. If you need time to process, emit a placeholder comment or heading rather than going silent to prevent stream idle timeouts.
 
