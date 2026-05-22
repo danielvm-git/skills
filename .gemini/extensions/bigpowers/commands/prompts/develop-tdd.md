@@ -133,6 +133,13 @@ After all tests pass, look for [refactor candidates](refactoring.md):
 
 After every behavior cycle, run the verify command from `specs/PLAN.md` if one exists for this step. Show evidence before declaring the step done.
 
+### 6. Manual Verification Handover
+
+Once the story is complete and all tests pass:
+1. Locate the **Verification Script** in `specs/RELEASE-PLAN.md` for this story.
+2. Present the script to the user as a step-by-step guide.
+3. Wait for the user to confirm the behavioral correctness before moving to the next story or declaring the task done.
+
 ## Checklist Per Cycle
 
 ```

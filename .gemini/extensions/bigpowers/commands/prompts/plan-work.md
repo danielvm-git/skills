@@ -71,6 +71,15 @@ Append the detailed steps under the relevant story in `specs/RELEASE-PLAN.md`. C
 
 ...
 
+## Verification Script (Step-by-Step)
+
+[A human-readable, step-by-step script for the user to verify the story's outcome. Focus on user-observable behavior.]
+
+1. [Action 1: e.g. Start the server]
+2. [Action 2: e.g. Open browser to http://localhost:3000]
+3. [Action 3: e.g. Click 'Login']
+4. [Observation: e.g. Verify that the login modal appears]
+
 ## Out of scope
 
 - [Explicit exclusions]

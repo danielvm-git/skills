@@ -58,6 +58,7 @@ Based on what you've found, identify which PMBOK phase this project is currently
 | **Plan** | specs/TASKS.md or PLAN.md exists; on `main`/`master` branch |
 | **Initiate** | On a feature branch; no code changes yet |
 | **Execute** | PLAN.md exists; on feature branch; steps in progress |
+| **Verify** | All implementation steps for a story/epic are done; awaiting UAT |
 | **Bug** | DIAGNOSIS.md exists; on `main`/`master` |
 | **Review** | All code written; no PR yet |
 | **Integrate** | PR open; tests passing |
