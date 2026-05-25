@@ -16,7 +16,9 @@ See `specs/adr/` for decision rationale.
 - **Audit Harness:** Gherkin-based compliance suite (`scripts/audit-compliance.sh`).
 - **Orchestration:** High-level project coordination meta-skills (Standard, Fast-Track, Ad-Hoc).
 - **Context Isolation:** Fresh 200K window per skill spawn to prevent "context rot."
-- **Supply-Chain Security:** Automated package legitimacy gates (slopcheck integration).
+- **Supply-Chain Security:** slopcheck in plan-work + audit-code (v3.0.0).
+- **Verify phase:** verify-work + run-evals between Build and Review (v3.0.0).
+- **58 skills:** consolidation release — see PLAN-NEXT-RELEASE.md.
 - **Wave-Based Execution:** Parallel execution of independent tasks to optimize speed.
 - **Local-First:** All state maintained in `specs/` (Markdown/Git).
 

@@ -48,10 +48,39 @@
 ### Verification Phase
 | Skill | Model | Budget | Rationale |
 |-------|-------|--------|-----------|
+| `verify-work` | **Haiku** | 100K | UAT checklist; step-by-step |
+| `run-evals` | **Sonnet** | 200K | Eval design and pass@k |
 | `validate-fix` | **Haiku** | 100K | Running tests; boolean result |
+
+### Review Phase
+| Skill | Model | Budget | Rationale |
+|-------|-------|--------|-----------|
 | `audit-code` | **Haiku** | 100K | Checklist validation; rule-based |
-| `request-review` | **Opus** | 250K | Holistic code review; subjective quality judgment |
-| `investigate-bug` | **Sonnet** | 200K | RCA; diagnostic reasoning |
+| `request-review` | **Opus** | 250K | Holistic code review |
+| `respond-review` | **Sonnet** | 200K | Categorize and apply feedback |
+| `trace-requirement` | **Haiku** | 100K | Deterministic trace |
+
+### Bug Phase
+| Skill | Model | Budget | Rationale |
+|-------|-------|--------|-----------|
+| `investigate-bug` | **Sonnet** | 200K | RCA |
+| `diagnose-root` | **Sonnet** | 200K | 4-phase root cause |
+| `validate-fix` | **Haiku** | 100K | Re-run suite |
+
+### Sustain & Utility (v3.0.0)
+| Skill | Model | Rationale |
+|-------|-------|-----------|
+| `stocktake-skills` | Sonnet | Catalog audit |
+| `evolve-skill` | Opus | Benchmark-gated evolution |
+| `search-skills` | Haiku | Lexical index lookup |
+| `compose-workflow` | Sonnet | Workflow recipes |
+| `simulate-agents` | Sonnet | Mock user + auditor |
+| `research-first` | Sonnet | Prior art search |
+| `scope-work` / `slice-tasks` | Sonnet | Planning artefacts |
+| `grill-with-docs` | Opus | Doc-grounded grill |
+| `setup-environment` / `reset-baseline` | Haiku | Mechanical prep |
+
+Full list: every SKILL.md declares `model:` — verify with `grep -rl '^model:' */SKILL.md | wc -l` (expect 58).
 
 ### Release Phase
 | Skill | Model | Budget | Rationale |

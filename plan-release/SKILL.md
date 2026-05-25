@@ -1,5 +1,6 @@
 ---
 name: plan-release
+model: sonnet
 description: Convert elaborated specs into a structured release plan with Gherkin acceptance criteria and WSJF-sorted epics. Produces specs/RELEASE-PLAN.md. Use when a spec is clear and ready to plan, after elaborate-spec, or when the user wants a release plan broken into epics and stories.
 ---
 

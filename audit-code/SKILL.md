@@ -1,5 +1,6 @@
 ---
 name: audit-code
+model: haiku
 description: Self-review checklist for the coding agent to run before dispatching a reviewer. Checks CONVENTIONS.md compliance, Boy Scout Rule, test coverage, types, and SOLID. Produces a pass/fail checklist. Use before request-review, before committing, or when user asks for a code quality check.
 ---
 
@@ -10,6 +11,23 @@ Run this self-review before asking anyone else to look at the code. The goal is 
 **Distinct from `request-review`:** This is the coding agent checking its own work. No second agent is involved. Run this first; run `request-review` after this passes.
 
 ## Checklist
+
+### Supply Chain & Security
+
+- [ ] slopcheck run for new dependencies; packages tagged in plan-work: `[OK]`, `[SUS]`, or `[SLOP]`
+- [ ] No `[SLOP]` packages without documented human approval
+- [ ] No secrets in diff (`sk-`, `ghp_`, `AKIA`, `.env` values) — see `guard-git` patterns
+- [ ] OWASP Top 10 spot-check: injection, broken auth, sensitive data exposure, misconfiguration (see `docs/references/security-threats.md`)
+
+### Provenance & Metadata
+
+- [ ] New plan artefacts include `type:` and `context:` metadata
+- [ ] Implementation steps reference ADR or commit SHA where decisions were made
+
+### Law of Demeter
+
+- [ ] No method chains through unrelated objects (e.g. `a.getB().getC().doX()`)
+- [ ] Collaborators talk to immediate neighbors only; law violations need explicit justification
 
 ### CONVENTIONS.md Compliance
 

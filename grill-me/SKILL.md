@@ -1,5 +1,6 @@
 ---
 name: grill-me
+model: sonnet
 description: Stress-test a plan or design through relentless questioning until every decision is resolved. Two modes: Design (default Q&A on decisions) and Docs (grounds every challenge in real library or API documentation). Use when user wants to challenge a plan, validate API assumptions, or mentions "grill me" or "grill me with docs".
 ---
 

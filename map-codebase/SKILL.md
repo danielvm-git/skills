@@ -1,5 +1,6 @@
 ---
 name: map-codebase
+model: sonnet
 description: "High-fidelity codebase surveying — analyzes stack, architecture, and gray areas (error handling, API shapes) and persists them into specs/CONTEXT.md. Goes beyond survey-context by identifying 'signals' for planning."
 ---
 

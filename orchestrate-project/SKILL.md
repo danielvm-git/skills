@@ -1,5 +1,6 @@
 ---
 name: orchestrate-project
+model: sonnet
 description: Meta-skill that enforces the 6-phase core loop (discover → elaborate → plan → build → verify → release) with hard gates. Use to coordinate multi-phase projects with guaranteed quality checkpoints. One-time command for the entire project lifecycle.
 ---
 
@@ -34,14 +35,15 @@ See [REFERENCE.md](REFERENCE.md) for detailed phase specifications and gate type
 ## How Orchestrate Works
 
 1. **Maintains STATE.md** — Tracks current phase, artifacts, decisions, risks.
-2. **Spawns appropriate skills** — Calls survey-context, elaborate-spec, plan-work, etc.
-3. **Enforces gates** — Hard stops if success criteria not met.
-4. **The Gatekeeper** (v1.19.0) — Between every Story implementation in PHASE 4:
+2. **Spawns appropriate skills** — Reads each skill's `model:` frontmatter and routes (haiku/sonnet/opus). Calls survey-context, research-first, elaborate-spec, plan-work, develop-tdd, verify-work, run-evals, etc. Decisions pass only via `specs/STATE.md` between spawns.
+3. **Methodology lenses** — If `specs/METHODOLOGY.md` exists, apply active reasoning modes (STRIDE, Cost-of-Delay) at phase gates.
+4. **Enforces gates** — Hard stops if success criteria not met.
+5. **The Gatekeeper** (v1.19.0) — Between every Story implementation in PHASE 4:
    - READ `specs/RELEASE-PLAN.md` to verify completion.
    - REQUIRE that the previous Story is marked `[x] Done`.
    - REFUSE to call `update_topic` for a new Story until the previous one is physically evidenced as complete.
-5. **Pauses for confirmation** — After each phase, asks "Ready to proceed?".
-6. **Archives history** — Saves PLAN.md as specs/PLAN-vX.Y.Z.md.
+6. **Pauses for confirmation** — After each phase, asks "Ready to proceed?".
+7. **Archives history** — Saves RELEASE-PLAN snapshots as specs/RELEASE-PLAN-vX.Y.Z.md when needed.
 
 ## Orchestration Modes
 

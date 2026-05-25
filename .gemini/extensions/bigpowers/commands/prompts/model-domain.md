@@ -77,6 +77,15 @@ Only offer to create an ADR when all three are true:
 
 If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).
 
+## Concurrency safety audit
+
+When the plan touches shared state, async, or multi-threaded code:
+
+- [ ] List every **shared mutable** location (globals, singletons, module-level caches).
+- [ ] For each: who reads, who writes, synchronization mechanism (lock, actor, immutable copy).
+- [ ] Flag **race risks** (check-then-act, non-atomic read-modify-write) with severity.
+- [ ] Record findings in `specs/CONTEXT.md` under `## Concurrency` or in an ADR if architectural.
+
 ---
 
 # ADR Format

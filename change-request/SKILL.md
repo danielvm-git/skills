@@ -1,5 +1,6 @@
 ---
 name: change-request
+model: sonnet
 description: Add a new requirement or reorder epics by WSJF value engineering against specs/RELEASE-PLAN.md. Two modes: Add (intake a new requirement mid-flight) and Reorder (re-score and re-sort all epics/stories). Use when a new requirement arrives mid-release, or when the plan needs prioritization.
 ---
 

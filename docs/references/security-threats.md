@@ -26,7 +26,7 @@
 - `node-ipc` (2022) — Malicious post-install hook wiped node_modules
 - `@babel/core` vs `@babel-core` — Typosquatter with 100K+ installs
 
-**Bigpowers Mitigation:** slopcheck integration in plan-work (Planned: v2.1.0)
+**Bigpowers Mitigation:** slopcheck integration in `plan-work` + supply-chain checklist in `audit-code` (v3.0.0)
 
 ---
 
@@ -82,7 +82,7 @@ slopcheck install malware-pkg --json
 **Workflow:**
 
 ```
-plan-work creates PLAN.md:
+plan-work creates specs/RELEASE-PLAN.md:
 
 Step 1: Install dependency @openai/api@4.28.0
 Step 2: Configure API client
@@ -93,7 +93,7 @@ During planning, before recommending packages:
 │  ├─ @openai/api → [OK]
 │  └─ colors → [SUS]
 │
-├─ Tag packages in PLAN.md:
+├─ Tag packages in RELEASE-PLAN.md:
 │  ├─ [OK] @openai/api v4.28.0
 │  └─ [SUS] colors v2.0.0 — **requires human verification**
 │

@@ -2,6 +2,8 @@
 
 Automated versioning and publishing with conventional commits.
 
+Package: [bigpowers on npm](https://www.npmjs.com/package/bigpowers)
+
 ## Installation ✅
 
 ```bash
@@ -10,7 +12,8 @@ npm install --save-dev semantic-release \
   @semantic-release/release-notes-generator \
   @semantic-release/changelog \
   @semantic-release/git \
-  @semantic-release/github
+  @semantic-release/github \
+  @semantic-release/npm
 ```
 
 Already in package.json devDependencies.
@@ -22,7 +25,7 @@ Already in package.json devDependencies.
 - Automatic changelog generation
 - Git tag creation
 - GitHub release creation
-- npm publication
+- npm publication (`@semantic-release/npm`)
 
 ## Tokens Setup
 

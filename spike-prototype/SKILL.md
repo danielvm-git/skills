@@ -1,5 +1,6 @@
 ---
 name: spike-prototype
+model: sonnet
 description: Throw-away prototype for unknown problem spaces. Output is learning notes in specs/SPIKE-<name>.md, not production code. Use when the domain or technology is unexplored, when estimates are impossible without experimentation, or when user says "spike", "prototype", or "proof of concept".
 ---
 

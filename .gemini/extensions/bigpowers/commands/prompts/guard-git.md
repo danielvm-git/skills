@@ -8,6 +8,7 @@ Installs a shared hook that blocks destructive git operations and enforces workf
 - **Safety**: `git push` (including `--force`), `git reset --hard`, `git clean -f`, `git branch -D`, `git checkout .`, `git restore .`.
 - **Discipline**: Blocks direct commits or pushes to protected branches (`main`, `master`).
 - **Standardization**: Enforces [Conventional Commits](https://www.conventionalcommits.org/) for all `git commit` commands.
+- **Secrets**: Blocks commits containing common secret patterns (`sk-`, `ghp_`, `AKIA`, `xoxb-`, `-----BEGIN` private keys) — see [REFERENCE.md](REFERENCE.md).
 
 ## Quick start
 
@@ -37,6 +38,18 @@ Full JSON examples, merge rules, Antigravity deny-list entries, and test command
 ---
 
 # Git guardrails — reference
+
+## Secret patterns (audit + pre-commit)
+
+Agents must not commit files containing:
+
+- `sk-` (OpenAI API keys)
+- `ghp_` / `gho_` (GitHub tokens)
+- `AKIA` (AWS access key id)
+- `xoxb-` (Slack bot tokens)
+- `-----BEGIN` private keys
+
+Use `audit-code` supply-chain checklist before commit. Consider `git-secrets` or custom pre-commit hook in target projects.
 
 ## Copy layout
 

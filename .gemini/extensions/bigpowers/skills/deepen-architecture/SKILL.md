@@ -50,7 +50,19 @@ Then use the Agent tool with `subagent_type=Explore` to walk the codebase. Don't
 
 Apply the **deletion test** to anything you suspect is shallow.
 
-### 2. Present candidates
+### 2. Module Depth score
+
+For each candidate module, assign a **Module Depth score** (1–5, Ousterhout):
+
+| Score | Meaning |
+|-------|---------|
+| 1 | Shallow — interface complexity ≈ implementation |
+| 3 | Balanced |
+| 5 | Deep — small interface, substantial hidden behavior |
+
+Include the score in each candidate row. Prioritize score ≤ 2 for deepening.
+
+### 3. Present candidates
 
 Present a numbered list of deepening opportunities. For each candidate:
 
@@ -65,7 +77,7 @@ Present a numbered list of deepening opportunities. For each candidate:
 
 Do NOT propose interfaces yet. Ask the user: "Which of these would you like to explore?"
 
-### 3. Grilling loop
+### 4. Grilling loop
 
 Once the user picks a candidate, drop into a grilling conversation. Walk the design tree with them — constraints, dependencies, the shape of the deepened module, what sits behind the seam, what tests survive.
 

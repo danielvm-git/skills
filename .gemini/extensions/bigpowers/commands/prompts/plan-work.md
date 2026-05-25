@@ -32,6 +32,8 @@ If this plan touches an existing module or symbol, run `assess-impact` first to 
 
 > **COMPLEXITY PUSHBACK (HARD GATE)** — Every step introducing a new abstraction (class, interface, helper, layer) MUST include a one-sentence "Reason for Depth": _"This abstraction is needed because [forcing function]..."_. If the sentence cannot be filled with a non-trivial reason, the abstraction is premature. Delete it and use inline code instead.
 
+> **SLOPCHECK (HARD GATE)** — For every external package proposed in the plan, run slopcheck (or manual registry check) and tag: `[OK]`, `[SUS]`, or `[SLOP]`. `[SUS]` and `[SLOP]` require explicit human approval before the step may execute. Document tags inline next to the package name.
+
 ## Process
 
 ### 1. Explore the codebase
@@ -59,15 +61,17 @@ Append the detailed steps under the relevant story in `specs/RELEASE-PLAN.md`. C
 
 ### Story [X.Y]: [title] — Implementation Steps
 
+**type:** feat | fix | refactor  
+**context:** domain | infra  
 **Context**: [One paragraph: what this story implements and why]
 
 ## Steps
 
-1. [Step description] → verify: `<runnable command>`
+1. [Step description] (ref: ADR-NNNN or commit SHA) → verify: `<runnable command>`
 
-2. [Step description] → verify: `<runnable command>`
+2. [Step description] (ref: ADR-NNNN or commit SHA) → verify: `<runnable command>`
 
-3. [Step description] → verify: `<runnable command>`
+3. [Step description] (ref: ADR-NNNN or commit SHA) → verify: `<runnable command>`
 
 ...
 

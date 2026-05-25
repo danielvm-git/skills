@@ -1,5 +1,6 @@
 ---
 name: seed-conventions
+model: sonnet
 description: Generate CLAUDE.md and CONVENTIONS.md for a brand-new project through a brief interview, and create the specs/ directory. Entry point for greenfield projects. Use when starting a new project from scratch, when user asks to set up AI agent conventions, or when there is no CLAUDE.md yet.
 ---
 
@@ -22,6 +23,8 @@ Ask the user these questions (one at a time, wait for each answer):
 1. **Project name and one-sentence description** — "What is this project? One sentence."
 
 2. **Stack** — "What language, framework, and runtime? (e.g. TypeScript / Next.js / Node 22)"
+
+2b. **Stack profile (optional)** — Offer: `swift`, `typescript-vue`, `node-service`, or none. If chosen, merge the matching fragment from `profiles/<name>.md` into generated `CONVENTIONS.md` (commands, architecture, never-do).
 
 3. **Commands** — "What commands do you use for: run, test, build, lint? I'll document them so agents know how to verify their work."
 

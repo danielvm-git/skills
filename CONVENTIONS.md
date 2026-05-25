@@ -72,6 +72,8 @@ Every skill that produces written output writes to `specs/` at the project root:
 - Prefer exceptions over error codes: throw/raise an exception rather than returning a numeric or boolean error sentinel.
 - Remove dead code (G9/F4): unused functions, unreachable branches, and stale imports must be deleted — not commented out.
 - Boy Scout Rule: leave every file you touch at least as clean as you found it. Fix the first broken window you see.
+- **Law of Demeter:** A method should call only its immediate collaborators — not `a.getB().getC().doX()`. Chain violations need explicit justification in code review.
+- **Verification mandate:** Every story in `specs/RELEASE-PLAN.md` must include a `## Verification Script`. No story is done until `verify-work` confirms it (or user explicitly waives with documented reason in STATE.md).
 - Exception messages must include the offending value, expected shape, and an actionable remediation hint for the agent.
 - SOLID beyond SRP: favor interfaces over concrete types (DIP) when injecting dependencies.
 

@@ -1,5 +1,6 @@
 ---
 name: survey-context
+model: haiku
 description: Per-task context survey — reads specs/ and CONVENTIONS.md, maps the current lifecycle phase, and suggests the next skill to invoke. Use at the start of any new task, when returning to a project after a break, or when unsure what to do next.
 ---
 
@@ -23,7 +24,7 @@ specs/
 ├── UBIQUITOUS_LANGUAGE.md → glossary status
 ├── SCOPE.md            → scope definition status
 ├── TASKS.md            → task breakdown status
-├── PLAN.md             → implementation plan status
+├── RELEASE-PLAN.md     → implementation plan status
 ├── REFACTOR.md         → refactor plan status
 ├── DIAGNOSIS.md        → active bug investigation
 ├── BUG-LOG.md          → historical bug log
@@ -53,11 +54,11 @@ Based on what you've found, identify which PMBOK phase this project is currently
 | Phase | Signals |
 |-------|---------|
 | **Discover** | No specs/ yet, or only rough notes |
-| **Design** | specs/SCOPE.md exists but no PLAN.md |
-| **Plan** | specs/TASKS.md or PLAN.md exists; on `main`/`master` branch |
+| **Design** | specs/SCOPE.md exists but no RELEASE-PLAN.md |
+| **Plan** | specs/TASKS.md or RELEASE-PLAN.md exists; on `main`/`master` branch |
 | **Initiate** | On a feature branch; no code changes yet |
-| **Execute** | PLAN.md exists; on feature branch; steps in progress |
-| **Verify** | All implementation steps for a story/epic are done; awaiting UAT |
+| **Execute** | RELEASE-PLAN.md exists; on feature branch; steps in progress |
+| **Verify** | Implementation done; run `verify-work` or `run-evals`; awaiting UAT |
 | **Bug** | DIAGNOSIS.md exists; on `main`/`master` |
 | **Review** | All code written; no PR yet |
 | **Integrate** | PR open; tests passing |
@@ -70,12 +71,13 @@ Based on the phase and state, recommend the most useful next step:
 - **If in Plan/Bug phase and on `main`**: Suggest `kickoff-branch` next.
 - **If in Initiate phase**: Suggest `develop-tdd` or `execute-plan`.
 - **If in Execute phase**: Suggest `develop-tdd` (continue step X) or `execute-plan`.
+- **If in Verify phase**: Suggest `verify-work` (UAT) or `run-evals` (capability evals).
 
 Example:
 ```
 Phase: Plan
 Active branch: main
-PLAN.md: exists
+RELEASE-PLAN.md: exists
 
 Suggested next: kickoff-branch (to create feature/auth branch)
 ```
@@ -87,7 +89,7 @@ Be specific — name the exact skill and why. If multiple options exist, list th
 If something looks wrong:
 - Broken tests in the baseline
 - DIAGNOSIS.md open with no active fix branch
-- PLAN.md with missing verify commands
+- RELEASE-PLAN.md with missing verify commands or Verification Script sections
 - CONVENTIONS.md violations in recent commits
 
 Report blockers first, before recommendations.

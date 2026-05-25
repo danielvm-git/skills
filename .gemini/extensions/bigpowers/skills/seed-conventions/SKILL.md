@@ -24,6 +24,8 @@ Ask the user these questions (one at a time, wait for each answer):
 
 2. **Stack** — "What language, framework, and runtime? (e.g. TypeScript / Next.js / Node 22)"
 
+2b. **Stack profile (optional)** — Offer: `swift`, `typescript-vue`, `node-service`, or none. If chosen, merge the matching fragment from `profiles/<name>.md` into generated `CONVENTIONS.md` (commands, architecture, never-do).
+
 3. **Commands** — "What commands do you use for: run, test, build, lint? I'll document them so agents know how to verify their work."
 
 4. **Architecture** — "Describe the key modules and their relationships in 1–2 sentences. What are the main moving parts?"

@@ -236,5 +236,9 @@ else
   print_opencode_instructions
   echo ""
   echo "bigpowers installed. Future updates:"
-  echo "  git pull && ./scripts/sync-skills.sh"
+  if [[ -d "$REPO_ROOT/.git" ]]; then
+    echo "  git pull && ./scripts/sync-skills.sh"
+  else
+    echo "  npm update -g bigpowers && bigpowers"
+  fi
 fi

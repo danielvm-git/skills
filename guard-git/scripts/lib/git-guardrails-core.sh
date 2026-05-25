@@ -2,7 +2,6 @@
 # Source from block-dangerous-git.sh only.
 
 GIT_GUARDRAILS_PATTERNS=(
-  "git push"
   "git reset --hard"
   "git clean -fd"
   "git clean -f"

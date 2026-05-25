@@ -1,9 +1,10 @@
 {
   "name": "bigpowers",
   "version": "1.0.0",
-  "description": "44 agent skills for spec-driven, test-first software development by solo developers",
+  "description": "58 agent skills for spec-driven, test-first software development by solo developers",
   "main": "index.js",
   "scripts": {
+    "compliance": "bash scripts/audit-compliance.sh specs/audit/features",
     "sync": "bash scripts/sync-skills.sh",
     "install": "bash scripts/install.sh",
     "postinstall": "bash scripts/sync-skills.sh && bash scripts/install.sh",
@@ -19,6 +20,10 @@
   ],
   "author": "Daniel",
   "license": "MIT",
+  "homepage": "https://github.com/danielvm-git/bigpowers#readme",
+  "bugs": {
+    "url": "https://github.com/danielvm-git/bigpowers/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/danielvm-git/bigpowers.git"
@@ -34,6 +39,7 @@
     "@semantic-release/commit-analyzer": "^11.1.0",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^9.2.6",
+    "@semantic-release/npm": "^11.0.3",
     "@semantic-release/release-notes-generator": "^12.1.0",
     "semantic-release": "^22.0.12"
   }

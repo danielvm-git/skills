@@ -49,7 +49,16 @@ Prior decisions: [relevant entries from specs/STATE.md — omit section if none 
 
 Do not include the full conversation, full file contents, or decisions unrelated to this agent's task.
 
-### 3. Dispatch in parallel
+### 3. Iterative retrieval (max 3 cycles)
+
+After each wave completes:
+1. **Dispatch** — run parallel agents with briefs.
+2. **Evaluate** — read outputs; list gaps vs goal.
+3. **Refine** — tighten briefs or spawn follow-up agents (max **3 cycles** total).
+
+Stop when gaps empty or cycle 3 reached — escalate to user.
+
+### 4. Dispatch in parallel
 
 Spawn all agents in a single message using multiple Agent tool calls. Each agent gets its own complete brief.
 
@@ -59,14 +68,14 @@ Agent 2: brief for task B
 Agent 3: brief for task C
 ```
 
-### 4. Collect and review results
+### 5. Collect and review results
 
 When all agents return:
 - Review each result independently
 - Run all verify commands
 - Check diffs for scope violations or CONVENTIONS.md breaches
 
-### 5. Integrate
+### 6. Integrate
 
 Merge accepted results. If any agent's result conflicts with another, resolve manually and note the conflict.
 

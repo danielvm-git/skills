@@ -102,6 +102,11 @@ jq -n --arg name "bigpowers" \
   echo "}"
 } > "$REPO_ROOT/opencode.json"
 
+# Regenerate lexical skill index for search-skills
+if [[ -x "$REPO_ROOT/scripts/build-skill-index.sh" ]]; then
+  bash "$REPO_ROOT/scripts/build-skill-index.sh" || true
+fi
+
 echo "sync-skills: $skill_count skills synced"
 echo "  → .cursor/rules/ ($skill_count .mdc files)"
 echo "  → .gemini/extensions/bigpowers/skills/ (Agent Skills)"

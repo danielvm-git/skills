@@ -11,7 +11,11 @@ Execute the tasks in `specs/RELEASE-PLAN.md` one at a time, showing evidence aft
 
 ### 1. Read the plan
 
-Read `specs/RELEASE-PLAN.md` in full. Confirm with the user:
+Read `specs/RELEASE-PLAN.md` in full. Parse `depends-on:` fields from `specs/TASKS.md` or story steps to build **execution waves** (steps with no unresolved deps run in parallel when user approves).
+
+> **CONTEXT ISOLATION** — Spawn each skill invocation (via `delegate-task` / subagent) with a **fresh context window**. Pass decisions only through `specs/STATE.md` — never rely on chat history from prior spawns.
+
+Confirm with the user:
 - How many steps are there?
 - Any steps to skip or reorder?
 - Should you stop after a specific step?
@@ -28,9 +32,12 @@ verify: [verify command]
 ```
 
 **b. Execute the work**
-Implement the step using the appropriate approach:
+
+For **wave execution**: group steps that share no `depends-on:` edges; run wave members in parallel via `dispatch-agents`; wait for all verify commands green before next wave. Use atomic `STATE.md` updates (read-modify-write one block) to avoid race conditions.
+
+Implement each step using:
 - Write/edit code directly for small focused changes
-- Spawn a subagent via `delegate-task` for complex isolated work
+- Spawn a subagent via `delegate-task` for complex isolated work (fresh context; read STATE.md first)
 
 > **STREAM CONTINUITY** — When writing file content, output in continuous chunks of ~200 lines. Do not pause. Continue immediately until complete. If you need time, emit a placeholder comment rather than going silent.
 
@@ -76,5 +83,5 @@ After all steps complete:
 ```
 ✓ Plan complete: N/N steps executed
 All verify commands passed.
-Suggested next: audit-code → commit-message → release-branch
+Suggested next: verify-work → run-evals → audit-code → simulate-agents → commit-message → release-branch
 ```

@@ -1,0 +1,22 @@
+---
+name: scope-work
+description: Define what is in and out of scope for the current effort and save as specs/SCOPE.md. Use when user wants a PRD, scope definition, or before plan-release on a new initiative.
+model: sonnet
+---
+
+# Scope Work
+
+Turn the current conversation into a bounded PRD at `specs/SCOPE.md`.
+
+## Process
+
+1. Read existing `specs/` artifacts (CONTEXT.md, RELEASE-PLAN.md if any).
+2. Interview (if needed): goal, users, in-scope, out-of-scope, constraints, success metrics.
+3. Write `specs/SCOPE.md` with: Vision, In Scope, Out of Scope, Constraints, Success Criteria.
+4. Run `research-first` if external dependencies are proposed.
+
+> **HARD GATE** — Every "in scope" item must map to a future story ID or explicit "deferred" with reason.
+
+## Verify
+
+→ verify: `test -f specs/SCOPE.md && grep -c "Out of Scope" specs/SCOPE.md | awk '{if($1>0) print "OK"; else print "MISSING"}'`

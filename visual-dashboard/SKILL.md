@@ -1,5 +1,6 @@
 ---
 name: visual-dashboard
+model: sonnet
 description: Start a browser-based dashboard that visualizes architecture, implementation plans, and project status. Use when showing complex diagrams, progress roadmaps, or UI mockups would be clearer than text. Persists artifacts in .bigpowers/dashboard/.
 ---
 

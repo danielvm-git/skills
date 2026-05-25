@@ -1,5 +1,6 @@
 ---
 name: craft-skill
+model: sonnet
 description: Create new bigpowers skills with proper structure, progressive disclosure, and bundled resources. Use when user wants to create, write, or build a new skill for the bigpowers lifecycle.
 ---
 
@@ -27,9 +28,13 @@ description: Create new bigpowers skills with proper structure, progressive disc
    - Additional reference files if content exceeds 100 lines
    - Utility scripts if deterministic operations needed
 
+   **Auto-skill from library README:** When user provides a library README or API docs URL, extract: triggers, HARD GATEs, verify commands, specs/ output — draft SKILL.md without inventing APIs not in the source.
+
+4. Add `model:` frontmatter (`haiku` | `sonnet` | `opus`) per [model-profiles.md](../docs/references/model-profiles.md).
+
 > **STREAM CONTINUITY** — When writing file content, output in continuous chunks of ~200 lines. Do not pause. Continue immediately until complete. If you need time, emit a placeholder comment rather than going silent.
 
-4. **Review with user** — present draft and ask:
+5. **Review with user** — present draft and ask:
    - Does this cover your use cases?
    - Anything missing or unclear?
    - Should any section be more/less detailed?

@@ -1,25 +1,39 @@
 # bigpowers — Best-in-Class Agentic Skills
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Version](https://img.shields.io/badge/version-1.14.0-blue.svg)
-![Skills](https://img.shields.io/badge/skills-44+-brightgreen.svg)
+![npm version](https://img.shields.io/npm/v/bigpowers.svg)
+![Skills](https://img.shields.io/badge/skills-58-brightgreen.svg)
 
-**44+ agent skills for high-integrity, spec-driven, test-first software development by solo developers.**
+**58 agent skills for high-integrity, spec-driven, test-first software development by solo developers.**
 
 `bigpowers` provides a prescriptive, vertical-slice methodology for building software with AI agents (Claude Code, Gemini CLI, Cursor). It bridges the gap between raw LLM capabilities and professional engineering standards.
+
+Published on npm: [bigpowers@1.0.0](https://www.npmjs.com/package/bigpowers)
 
 ---
 
 ## 🚀 Quick Start
 
+### npm (recommended)
+
 ```bash
-# 1. Clone the repository
+# One-shot setup — downloads, syncs artifacts, and links skills to your tools
+npx bigpowers
+
+# Or install globally and run the setup command anytime
+npm install -g bigpowers
+bigpowers
+```
+
+Both commands sync skill artifacts and link them to Claude Code, Gemini CLI, and Cursor (see [Prerequisites](#-prerequisites)).
+
+### From source (contributors)
+
+```bash
 git clone https://github.com/danielvm-git/bigpowers.git && cd bigpowers
-
-# 2. Install globally (links to Claude, Gemini, and Cursor)
+npm install          # runs postinstall: sync + link
+# or manually:
 bash scripts/install.sh
-
-# 3. Sync artifacts
 npm run sync
 ```
 
@@ -28,7 +42,7 @@ npm run sync
 ## 🛠 Prerequisites
 
 - **Bash**: Required for all scripts.
-- **Node.js**: Required for `npm` commands.
+- **Node.js**: v14+ (required for npm/npx).
 - **jq**: (Highly Recommended) Used for robust configuration of tool settings.
 - **AI Tools**: One or more of:
   - [Claude Code](https://claude.ai/code)
@@ -40,36 +54,58 @@ npm run sync
 ## 🔄 Maintenance (Update & Uninstall)
 
 ### Update
-To get the latest skills and performance improvements:
+
+**npm install:**
+
+```bash
+npm update -g bigpowers
+bigpowers    # re-sync and refresh symlinks
+```
+
+**git clone:**
+
 ```bash
 git pull
 npm run sync
 ```
-*Note: Since the installation uses symlinks, syncing automatically updates the tools.*
+
+*Install uses symlinks — re-running setup refreshes links without duplicating files.*
 
 ### Uninstall
-To remove all managed symlinks and configuration hooks:
+
+**npm install:**
+
+```bash
+bash "$(npm root -g)/bigpowers/scripts/install.sh" --uninstall
+npm uninstall -g bigpowers
+```
+
+**git clone:**
+
 ```bash
 bash scripts/install.sh --uninstall
 ```
 
 ### Reinstall
-If you need a fresh start:
+
 ```bash
-bash scripts/install.sh --uninstall && bash scripts/install.sh
+npx bigpowers
+# or, if installed globally:
+bigpowers
 ```
 
 ---
 
 ## 🏗 The BMAD Lifecycle
 
-Every task in `bigpowers` follows a prescriptive 5-phase arc to ensure integrity:
+Every task in `bigpowers` follows a prescriptive lifecycle (see `SKILL-INDEX.md`):
 
-1.  **Discover**: Investigate context, map unknowns, and survey requirements.
-2.  **Elaborate**: Formalize specs and lock design decisions (ADRs).
-3.  **Plan**: Write a verifiable, Karpathy-style implementation roadmap.
-4.  **Build**: Execute via TDD, vertical slices, and small commits.
-5.  **Sustain**: Audit quality, verify compliance, and release.
+1.  **Discover**: survey-context, research-first, elaborate-spec.
+2.  **Elaborate / Plan**: scope-work, plan-work, slice-tasks.
+3.  **Build**: develop-tdd, execute-plan.
+4.  **Verify**: verify-work, run-evals — prove it works before review.
+5.  **Review / Release**: audit-code, request-review, release-branch.
+6.  **Sustain**: stocktake-skills, evolve-skill (benchmark-gated).
 
 ---
 
@@ -93,7 +129,7 @@ Every task in `bigpowers` follows a prescriptive 5-phase arc to ensure integrity
 - `scripts/`: Installation, syncing, and compliance tools.
 - `specs/`: The "Brain" of your project — all planning and decisions live here.
 - `docs/references/`: Theoretical foundations (Uncle Bob, Ousterhout, Karpathy, etc.).
-- `[skill-name]/`: Source files for each of the 44+ skills.
+- `[skill-name]/`: Source files for each of the 58 skills.
 
 ---
 

@@ -1,5 +1,7 @@
 # Release & Publishing Guide
 
+Package: [bigpowers on npm](https://www.npmjs.com/package/bigpowers)
+
 ## Quick Start
 
 ### 1. Setup (one-time)
@@ -68,11 +70,19 @@ See `.github/CONVENTIONAL-COMMITS.md` for full format.
 
 ## Manual Release (Local)
 
+For full semantic-release (GitHub + npm + changelog):
+
 ```bash
 export GITHUB_TOKEN=$(gh auth token)
 export NPM_TOKEN=[from npmjs.org]
 
 npm run release
+```
+
+To publish the current `package.json` version to npm only:
+
+```bash
+npm publish
 ```
 
 ## Version History

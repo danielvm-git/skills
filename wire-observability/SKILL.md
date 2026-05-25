@@ -1,5 +1,6 @@
 ---
 name: wire-observability
+model: sonnet
 description: Add structured JSON logging, observability commands, and idempotent setup scripts to a project. Use when a project needs production-readiness instrumentation, when user wants structured logging, or as a production-readiness gate at any phase of development.
 ---
 

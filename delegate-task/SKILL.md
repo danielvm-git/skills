@@ -1,5 +1,6 @@
 ---
 name: delegate-task
+model: sonnet
 description: Delegate one complex task to a single subagent, review its work in two stages before merging back. Sequential — one agent at a time, with oversight. Use when a task is complex and requires careful review before the result is accepted. Distinct from dispatch-agents (no parallelism here; reviewer sees full diff before proceeding).
 ---
 
@@ -26,9 +27,13 @@ Prior decisions: [relevant entries from specs/STATE.md — omit section if none 
 
 Do not include full file contents, full conversation history, or decisions unrelated to this task.
 
-### 2. Spawn the subagent
+### 2. Spawn the subagent (iterative retrieval, max 3 cycles)
 
-Use the Agent tool to spawn the subagent with the complete brief. Include:
+Use the Agent tool with a **fresh context** per spawn. Pass prior decisions only via `specs/STATE.md`.
+
+**Cycle:** dispatch → evaluate output vs goal → refine brief → re-spawn if needed (max 3 cycles).
+
+Include in each brief:
 - All context the agent needs (it starts cold — no shared state)
 - Reference to CONVENTIONS.md constraints
 - The verify command it must run before reporting done

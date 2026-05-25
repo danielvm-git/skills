@@ -15,24 +15,28 @@ Generate an npm automation token:
 Add to GitHub:
 
 ```bash
-# In your GitHub repo:
-# Settings → Secrets and variables → Actions
-# New repository secret:
-#   Name: NPM_TOKEN
-#   Value: [paste token from npm]
+gh secret set NPM_TOKEN --body "your-automation-token"
 ```
 
-## 2. Publishing Workflow
+## 2. Release Workflow
+
+Releases are automated by [semantic-release](https://github.com/semantic-release/semantic-release) on every push to `main` with conventional commits.
 
 ```bash
-# Tag a release
-git tag v1.0.0
-git push origin v1.0.0
-
-# GitHub Actions automatically:
-# 1. Publishes to npm
-# 2. Creates GitHub Release
+git commit -m "feat(skills): add example skill"
+git push origin main
 ```
+
+GitHub Actions automatically:
+
+1. Analyzes commits and bumps semver
+2. Updates `CHANGELOG.md` and `package.json`
+3. Publishes to [npm](https://www.npmjs.com/package/bigpowers)
+4. Creates a GitHub Release and git tag
+
+Manual tagging (`git tag v1.0.0`) is not required.
+
+See `RELEASE.md` and `.github/SEMANTIC-RELEASE.md` for commit format and troubleshooting.
 
 ## 3. Sync Skills Workflow
 
@@ -43,28 +47,15 @@ git push origin main
 # .cursor/rules and .gemini/ auto-regenerated and committed
 ```
 
-## 4. Semantic Versioning
+## 4. Verify Setup
 
 ```bash
-# Patch (bug fixes)
-npm version patch  # 1.0.0 → 1.0.1
-git push && git push --tags
+# Workflows enabled
+gh workflow list
 
-# Minor (new features)
-npm version minor  # 1.0.0 → 1.1.0
-git push && git push --tags
+# NPM_TOKEN secret set
+gh secret list
 
-# Major (breaking changes)
-npm version major  # 1.0.0 → 2.0.0
-git push && git push --tags
-```
-
-## 5. Verify Setup
-
-```bash
-# Check workflows are enabled:
-# GitHub repo → Actions → should see both workflows
-
-# Check secrets are set:
-# GitHub repo → Settings → Secrets → NPM_TOKEN should exist
+# Latest published version
+npm view bigpowers version
 ```

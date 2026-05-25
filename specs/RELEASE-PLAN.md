@@ -1,229 +1,122 @@
-# Release Plan: bigpowers
+# Release Plan: bigpowers v3.0.0 Consolidation
 
-Current audit score: **~94% (~84/89)** — post-v2.0.0.
+**Status:** In progress · **Target:** v3.0.0 (semantic-release at merge)  
+**Scope:** [specs/PLAN-NEXT-RELEASE.md](PLAN-NEXT-RELEASE.md)
 
-> **Note on Versioning:** This plan uses "Target Milestones" for planning. Actual version numbers are determined automatically by `semantic-release` at merge time based on commit types (Conventional Commits).
-
-Ordered by WSJF: (Business Value + Time Criticality + Risk Reduction) / Job Size.
-
----
-
-## Release Sequence
-
-| Milestone | Status | WSJF | Focus | Objective |
-|:----------|:-------|:-----|:------|:----------|
-| v1.11.0–v1.18.0 | ✅ | — | Foundation | Benchmarks → harness → conventions → guardrails → execution loop |
-| v2.0.0 | ✅ | — | Framework | Reference library (11 docs) + `orchestrate-project` meta-skill |
-| **v2.1.0** | ⏳ | **8.0** | Repo Health | Documentation refactoring: specs/ restructure, SKILL-INDEX accuracy, ADRs |
-| **v2.1.1** | 📋 | **8.0** | Integration | OpenCode integration: automated `opencode.json` and `AGENTS.md` generation |
-| **v2.2.0** | 📋 | **4.2** | Security | slopcheck supply-chain gates in `plan-work` + `audit-code` |
-| **v2.3.0** | 📋 | **3.5** | Ergonomics | `handoff` skill + `terse-mode` hardening |
-| **v2.4.0** | 📋 | **3.3** | Isolation | Context isolation (fresh 200K/skill) + model routing |
-| **v2.5.0** | 📋 | **3.0** | Taxonomy | Provenance links, `type:` / `context:` metadata in plans |
-| **v2.6.0** | 📋 | **2.8** | Complexity | Law of Demeter, Module Depth score, concurrency safety |
-| **v2.7.0** | 📋 | **1.5** | Execution | Wave-based parallel task execution |
-| **v3.0.0** | 📋 | < 1.0 | AI Tier | Semantic Search, Skill Composition, Multi-Agent Simulation |
+Current audit score: **~94%** — must remain ≥ 94% after merge.
 
 ---
 
-## Pending Releases — Detail
+## Release at a Glance
 
-### v2.1.0: Repo Health (WSJF 8.0) ⏳ ← next
-
-Highest WSJF: repo misrepresents itself right now (ghost skills, wrong artifact names, duplicate
-audit tables). Zero risk (renames only), high payoff — unblocks everything downstream.
-
-**Success Criteria:**
-- [ ] `specs/CONTEXT.md` exists with Vision, Technology, Architecture, Glossary sections.
-- [ ] `specs/SCOPE.md` is the canonical scope artifact (renamed from PROJECT.md).
-- [ ] `specs/adr/` contains all 6 hard-decision ADRs.
-- [ ] `SKILL-INDEX.md` counts match reality: all 44 skills present, ghosts marked 📋.
-- [ ] All root-level count references say "44+" (CLAUDE.md, GEMINI.md, README.md).
-- [ ] `RELEASE-PLAN.md` has no completed-release detail blocks; all future items consolidated here.
-- [ ] `CONVENTIONS.md` documents the two naming exceptions (terse-mode, visual-dashboard).
-
-→ verify: `wc -l specs/CONTEXT.md specs/SCOPE.md specs/adr/*.md | awk '$1 > 300 {print "OVERSIZED:", $2}'`
+| Dimension | Before | After |
+|-----------|--------|-------|
+| Active skills | 44 | **58** |
+| Planned skills | 6 | **0** |
+| Lifecycle | Build → Review | Build → **Verify** → Review |
+| Stack profiles | ad hoc | `profiles/` + seed-conventions |
+| Self-evolution | none | `evolve-skill` + benchmark |
 
 ---
 
-### v2.1.1: OpenCode Integration (WSJF 8.0) 📋
+## Workstreams (WSJF order)
 
-Automates integration for the OpenCode agent platform. Currently manual and error-prone.
+### WS1 — Security · WSJF 4.5
 
-**Success Criteria:**
-- [ ] `sync-skills.sh` generates a root-level `opencode.json` for the bigpowers repo.
-- [ ] `scripts/install.sh` automatically creates `opencode.json` in the target project if it doesn't exist.
-- [ ] `seed-conventions` skill generates both `AGENTS.md` and `opencode.json` templates.
-- [ ] `AGENTS.md` follows the bigpowers template from `docs/AGENTS.md`.
+- [x] slopcheck tags in `plan-work` ([OK]/[SUS]/[SLOP])
+- [x] Supply-chain + OWASP in `audit-code`
+- [x] Secret patterns documented in `guard-git`
+- [x] `docs/references/security-threats.md` reconciled
 
-→ verify: `grep -r "opencode.json" scripts/sync-skills.sh scripts/install.sh seed-conventions/SKILL.md | wc -l | awk '{if($1>=3) print "OK"; else print "MISSING"}'`
+→ verify: `grep -r slopcheck plan-work/SKILL.md audit-code/SKILL.md | wc -l | awk '{if($1>=2) print "OK"}'`
 
-### Story [2.1.1]: OpenCode Integration — Implementation Steps
+### WS2 — Verification & Evals · WSJF 4.3
 
-**Context**: Automates the generation of `opencode.json` and `AGENTS.md` to ensure `bigpowers` rules are correctly loaded by the OpenCode agent platform.
+- [x] `verify-work`, `run-evals` skills
+- [x] Verification Script template in `plan-work`
+- [x] UAT checkpoint in `execute-plan`
+- [x] RED/GREEN/REFACTOR commits in `develop-tdd`
 
-## Steps
+→ verify: `test -d verify-work && test -d run-evals && echo OK`
 
-1. Update `scripts/sync-skills.sh` to generate a default `opencode.json` at the repo root → verify: `bash scripts/sync-skills.sh && grep "instructions" opencode.json`
+### WS3 — Discovery & Planning · WSJF 4.0
 
-2. Update `scripts/install.sh` to create `opencode.json` in the user's project if it doesn't exist, and update `print_opencode_instructions` → verify: `grep -A 5 "install_opencode" scripts/install.sh`
+- [x] `research-first`, `scope-work`, `slice-tasks`, `grill-with-docs`
+- [x] `using-bigpowers` lifecycle updated
 
-3. Update `seed-conventions/SKILL.md` to include `AGENTS.md` and `opencode.json` templates in its output → verify: `grep -E "AGENTS.md|opencode.json" seed-conventions/SKILL.md | wc -l | awk '{if($1>=2) print "OK"; else print "MISSING"}'`
+→ verify: `ls scope-work/SKILL.md slice-tasks/SKILL.md grill-with-docs/SKILL.md research-first/SKILL.md`
 
-4. Run `sync-skills.sh` to propagate changes to `.cursor/rules` and `.gemini/extensions` → verify: `bash scripts/sync-skills.sh && grep "AGENTS.md" .cursor/rules/seed-conventions.mdc`
+### WS4 — Ergonomics · WSJF 3.8
 
-## Out of scope
+- [x] Handoff + compaction in `session-state`
+- [x] `terse-mode` caveman rules (existing)
+- [x] `organize-workspace` gitignore section (existing)
 
-- Direct integration with OpenCode API or remote rule fetching.
+→ verify: `grep -c Handoff session-state/SKILL.md | awk '{if($1>0) print "OK"}'`
 
-## Risks
+### WS5 — Context Isolation + Routing · WSJF 3.3
 
-- `opencode.json` schema might change (mitigated by following the current documentation found in the OpenCode source).
+- [x] `model:` on all SKILL.md
+- [x] `execute-plan` isolation + STATE.md channel
+- [x] `orchestrate-project` reads model + spawn list
 
----
+→ verify: `grep -rl '^model:' */SKILL.md 2>/dev/null | wc -l | awk '{if($1==58) print "OK"; else print $1}'`
 
-### v2.2.0: Supply-Chain Security (WSJF 4.2) 📋
+### WS6 — Taxonomy & Provenance · WSJF 3.0
 
-Closes documented drift: `docs/references/security-threats.md` describes slopcheck but no skill
-implements it. Risk Reduction score is 9/10 — one supply-chain incident is a reputation kill.
+- [x] `type:` / `context:` in plan-work template
+- [x] ADR/SHA refs on steps
+- [x] `audit-code` metadata checks
 
-**Success Criteria:**
-- [ ] `plan-work` runs slopcheck for every external package and tags with `[OK]`, `[SUS]`, or `[SLOP]`.
-- [ ] `audit-code` includes a supply-chain checklist item (slopcheck verified?).
-- [ ] `[SUS]` and `[SLOP]` packages trigger a HARD GATE requiring human confirmation.
-- [ ] `docs/references/security-threats.md` reflects actual implementation (no drift).
+→ verify: `grep -c 'type:' plan-work/SKILL.md | awk '{if($1>0) print "OK"}'`
 
-→ verify: `grep -r "slopcheck" plan-work/SKILL.md audit-code/SKILL.md | wc -l | awk '{if($1>=2) print "OK"; else print "MISSING"}'`
+### WS7 — Architectural Complexity · WSJF 2.8
 
----
+- [x] Demeter in CONVENTIONS.md + audit-code
+- [x] Module Depth score in deepen-architecture
+- [x] Concurrency audit in model-domain
 
-### v2.3.0: Developer Ergonomics (WSJF 3.5) 📋
+→ verify: `grep -c Demeter CONVENTIONS.md audit-code/SKILL.md | awk -F: '{s+=$2} END {if(s>=2) print "OK"}'`
 
-High Business Value relative to job size. `handoff` is the single most-requested missing skill.
+### WS8 — Wave Execution · WSJF 2.5
 
-**Success Criteria:**
-- [ ] `handoff` skill compacts current session (open decisions, last step, required reading) into a single cold-start document.
-- [ ] `terse-mode` updated with Pocock `caveman` rules (drop articles, filler, pleasantries; target 30% token reduction).
-- [ ] `organize-workspace` includes an automated `.gitignore` suggester.
+- [x] Waves + `depends-on:` in execute-plan
 
-→ verify: `[ -f handoff/SKILL.md ] && echo "OK" || echo "MISSING: handoff skill"`
+→ verify: `grep -c 'depends-on' execute-plan/SKILL.md | awk '{if($1>0) print "OK"}'`
 
----
+### WS9 — Self-Evolution · WSJF 2.0
 
-### v2.4.0: Context Isolation + Model Routing (WSJF 3.3) 📋
+- [x] stocktake-skills, evolve-skill, search-skills, compose-workflow, simulate-agents
+- [x] `specs/METHODOLOGY.md`
+- [x] craft-skill README generator
+- [x] Iterative retrieval in dispatch-agents / delegate-task
+- [x] evolve-skill benchmark path documented; run `bash scripts/score_run.sh` in bigpowers-benchmark repo at release merge
 
-Implements ADR-0004 and ADR-0006. Largest quality lever (+40% quality, -20% tokens per
-DECISION-JUSTIFICATION research). Requires `orchestrate-project` as coordinator.
+→ verify: `ls evolve-skill/SKILL.md specs/METHODOLOGY.md`
 
-**Success Criteria:**
-- [ ] `execute-plan` spawns every skill with a fresh, isolated context window.
-- [ ] Each skill's `SKILL.md` declares a `model:` tier (haiku / sonnet / opus).
-- [ ] Orchestrator reads `model:` and routes accordingly.
-- [ ] `STATE.md` is the sole mechanism for passing decisions between skill spawns.
+### WS10 — Stack Profiles · WSJF 1.8
 
-→ verify: `grep -r "model:" */SKILL.md | wc -l | awk '{if($1>10) print "OK"; else print "PARTIAL"}'`
+- [x] profiles/swift.md, typescript-vue.md, node-service.md
+- [x] seed-conventions profile picker
 
----
-
-### v2.5.0: Taxonomy & Provenance (WSJF 3.0) 📋
-
-**Success Criteria:**
-- [ ] All plan templates include `type:` (feat/fix/refactor) and `context:` (domain/infra) metadata.
-- [ ] `plan-work` mandates linking every step to an ADR or commit SHA.
-- [ ] `audit-code` verifies presence of metadata in all new artifacts.
-
-→ verify: `grep -r "type:\|context:" specs/PLAN*.md 2>/dev/null | wc -l`
+→ verify: `ls profiles/*.md | wc -l | awk '{if($1==3) print "OK"}'`
 
 ---
 
-### v2.6.0: Architectural Complexity (WSJF 2.8) 📋
+## Merge Gates
 
-**Success Criteria:**
-- [ ] `audit-code` and `CONVENTIONS.md` include a Law of Demeter checklist.
-- [ ] `deepen-architecture` produces a numeric Module Depth score (Ousterhout compliance).
-- [ ] `model-domain` includes a concurrency safety audit (shared mutable state detection).
-
-→ verify: `grep -c "Demeter" audit-code/SKILL.md CONVENTIONS.md | awk -F: '$2>0' | wc -l | awk '{if($1==2) print "OK"; else print "MISSING"}'`
-
----
-
-### v2.7.0: Wave-Based Parallel Execution (WSJF 1.5) 📋
-
-Depends on v2.4.0 (context isolation must be in place for safe parallel spawns).
-
-**Success Criteria:**
-- [ ] `execute-plan` automatically groups independent tasks into parallel execution waves.
-- [ ] Dependency parsing reads `depends-on:` declarations from PLAN.md task entries.
-- [ ] Atomic `STATE.md` writes prevent race conditions between wave executors.
-
-→ verify: `grep -c "wave\|parallel" execute-plan/SKILL.md | awk '{if($1>0) print "OK"; else print "MISSING"}'`
-
----
-
-### v3.0.0: AI Capability Tier (WSJF < 1.0) 📋
-
-Major version: significant new capability class. Candidates pending WSJF scoring before commitment:
-
-- **Semantic Skill Search** — vector embeddings to find the right skill from natural language intent.
-- **Skill Composition** — meta-skill to chain multiple skills into a custom workflow.
-- **Multi-Agent Simulation** — "Mock User" + "Auditor" agents against a new feature before human review.
-- **Auto-Skill Generator** — `craft-skill` upgrade: draft `SKILL.md` from a library README or API docs.
-- **Methodology Lenses** — `specs/METHODOLOGY.md` encoding project-specific reasoning modes (STRIDE, Cost-of-Delay).
+| Gate | Command | Target |
+|------|---------|--------|
+| Skill count | `find . -maxdepth 2 -name SKILL.md \| grep -v .git\|.cursor\|.gemini \| wc -l` | 58 |
+| Sync | `bash scripts/sync-skills.sh` | 58 skills synced |
+| Compliance | `npm run compliance` | all suites ≥ 94% |
+| Benchmark | bigpowers-benchmark repo | ≥ baseline |
 
 ---
 
 ## Audit Score Tracking
 
-| Version | Score | Notes |
-|---------|-------|-------|
-| v1.12.0 | ~75% (67/89) | First measured score |
-| v1.12.1 | ~84% (~75/89) | +9 from CONVENTIONS.md heuristics |
-| v1.14.0 | ~87% (~77/89) | +3 from karpathy.feature behavioral mandates |
-| v1.15.0 | ~91% (~81/89) | +4 from superpowers.feature gates |
-| v1.16.0 | ~93% (~83/89) | +3 from cleancode.feature T4/T5/T8 |
-| v1.17.0 | ~94% (~84/89) | +1 from guardrails discipline |
-| v2.0.0 | ~94% (~84/89) | +0 (reference library; enforcement deferred to v2.2+) |
-| **Current** | **~94%** | **Next lift: v2.2.0 security gates** |
-
----
-
-## Story: Stream Continuity Guards (tactical — no version bump)
-
-**Context**: When an agent writes large files or long documents, pausing too long between token emissions triggers a stream idle timeout. The connection dies, tokens are burned with no result, and the next attempt starts from scratch — burning even more. The fix (sourced from r/ClaudeCode, user Bitter-Law3957) is to keep the stream alive by outputting continuously in chunks of ~200 lines. This story adds a `STREAM CONTINUITY` callout to the four skills that routinely emit large continuous output: `craft-skill`, `execute-plan`, `develop-tdd`, and `write-document`. The callout is co-located with the exact step where heavy output begins in each skill — hidden inside the skill (Pocock deep module) and enforced automatically (Superpowers hard gate).
-
-**Callout text (identical in all 4 skills)**:
-```
-> **STREAM CONTINUITY** — When writing file content, output in continuous chunks of ~200 lines. Do not pause between sections. Continue immediately until complete. If you need time to think, emit a placeholder heading rather than going silent.
-```
-
-### Steps
-
-1. Add `STREAM CONTINUITY` callout to `craft-skill/SKILL.md` at Step 3 ("Draft the skill") → verify: `grep -c "STREAM CONTINUITY" craft-skill/SKILL.md`
-
-2. Add `STREAM CONTINUITY` callout to `execute-plan/SKILL.md` at Step 2b ("Execute the work") → verify: `grep -c "STREAM CONTINUITY" execute-plan/SKILL.md`
-
-3. Add `STREAM CONTINUITY` callout to `develop-tdd/SKILL.md` at Step 3 ("Incremental Loop") → verify: `grep -c "STREAM CONTINUITY" develop-tdd/SKILL.md`
-
-4. Add `STREAM CONTINUITY` callout to `write-document/SKILL.md` at Step 2 ("Draft with Semantic Velocity") → verify: `grep -c "STREAM CONTINUITY" write-document/SKILL.md`
-
-5. Run sync-skills.sh to propagate all 4 changes to generated artifacts → verify: `bash scripts/sync-skills.sh 2>&1 | grep "44 skills synced"`
-
-### Out of scope
-
-- No new skills
-- No edits to `.cursor/rules/` or `.gemini/` (auto-generated by step 5)
-- No changes to CONVENTIONS.md or CLAUDE.md
-- No changes to any skill outside the 4 listed
-
-### Risks
-
-- sync-skills.sh count: if a 45th skill was added since baseline, adjust the grep count accordingly
-
----
-
-## bigpowers-benchmark
-
-Tracked in a separate repo: `/Users/danielvm/Developer/bigpowers-benchmark/`
-
-See `bigpowers-benchmark/specs/RELEASE-PLAN.md` for the full v1.0.0 implementation plan
-(14 steps, 5 SANDBOX tasks, automated scoring pipeline).
+| Version | Score |
+|---------|-------|
+| v2.0.0 | ~94% |
+| **v3.0.0 target** | ≥ 94% (no regression) |

@@ -6,7 +6,18 @@ alwaysApply: false
 
 # Using bigpowers
 
-Welcome to **bigpowers** — a lifecycle of 37 agent skills for production-ready, TDD-driven software by solo developers.
+Welcome to **bigpowers** — a lifecycle of **58** agent skills for production-ready, TDD-driven software by solo developers.
+
+## Install
+
+```bash
+npx bigpowers                  # one-shot setup
+npm install -g bigpowers       # global install, then run: bigpowers
+```
+
+From source (contributors): `git clone` → `npm install` or `bash scripts/install.sh`.
+
+Package: [bigpowers on npm](https://www.npmjs.com/package/bigpowers)
 
 ## What bigpowers is
 
@@ -17,7 +28,7 @@ A curated set of skills organized around the PMBOK developer lifecycle. Each ski
 ```
 BOOTSTRAP   using-bigpowers (this skill, first time only)
               ↓
-DISCOVER    survey-context → elaborate-spec
+DISCOVER    survey-context → research-first → elaborate-spec
               ↓
 DESIGN      model-domain / define-language / grill-me / deepen-architecture / design-interface
               ↓
@@ -28,6 +39,8 @@ INITIATE    kickoff-branch → guard-git / hook-commits / seed-conventions
 SPIKE?      spike-prototype → (feeds back to plan-work)
               ↓
 EXECUTE     develop-tdd + enforce-first ←→ delegate-task / dispatch-agents / execute-plan
+              ↓
+VERIFY      run-evals → verify-work
               ↓
 HARDEN      wire-observability (any phase)
               ↓
@@ -59,7 +72,8 @@ UTILITY     terse-mode / craft-skill / edit-document (any phase)
 - **specs/ is your memory.** All domain docs, plans, and investigation outputs go in `specs/` at your project root.
 - **`gh` for PRs only.** Never create GitHub issues from skills — use local Markdown files instead.
 - **One skill, one thing.** If you're unsure which skill to call, call `survey-context` — it reads your current state and recommends the next step.
-- **verify: every step.** Every task in `specs/PLAN.md` must have a `verify: <runnable command>`. Evidence over claims.
+- **verify: every step.** Every task in `specs/RELEASE-PLAN.md` must have a `verify: <runnable command>`. Evidence over claims.
+- **58 skills.** See `SKILL-INDEX.md`; find skills with `search-skills`.
 
 ## After this
 

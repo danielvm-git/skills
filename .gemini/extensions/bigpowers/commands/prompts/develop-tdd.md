@@ -3,7 +3,7 @@
 
 > **HARD GATE** — Do NOT proceed if on `main` or `master`. Run `kickoff-branch` first to create a feature branch or worktree.
 >
-> **HARD GATE** — Do NOT write code before you have a plan. If you are starting a new task, run `plan-work` to create `specs/PLAN.md`. If you are fixing a bug, run `investigate-bug` to create `specs/DIAGNOSIS.md`.
+> **HARD GATE** — Do NOT write code before you have a plan. If you are starting a new task, run `plan-work` to create `specs/RELEASE-PLAN.md`. If you are fixing a bug, run `investigate-bug` to create `specs/DIAGNOSIS.md`.
 >
 > **RECURSIVE DISCIPLINE** — This lifecycle apply to EVERY task, including updating these skills. Never skip planning because a task is "meta" or "just documentation."
 
@@ -60,7 +60,7 @@ If you find yourself thinking these things, you are likely deviating from produc
 
 Before writing any code:
 
-- [ ] Read `specs/PLAN.md` or `specs/DIAGNOSIS.md` if they exist — understand the task and verify steps
+- [ ] Read `specs/RELEASE-PLAN.md` or `specs/DIAGNOSIS.md` if they exist — understand the task and verify steps
 - [ ] Confirm with user what interface changes are needed
 - [ ] Confirm with user which behaviors to test (prioritize)
 - [ ] Identify opportunities for [deep modules](deep-modules.md) (small interface, deep implementation)
@@ -79,9 +79,9 @@ Apply the **enforce-first** F.I.R.S.T rubric when writing tests: Fast, Independe
 Write ONE test that confirms ONE thing about the system:
 
 ```
-RED:    Write test for first behavior → test fails
-GREEN:  Write minimal code to pass → test passes
-COMMIT: git commit -m "feat/fix(<scope>): first tracer bullet..."
+RED:    Write test for first behavior → test fails → commit via commit-message: test(<scope>): ...
+GREEN:  Write minimal code to pass → test passes → commit: feat(<scope>): ... or fix(<scope>): ...
+REFACTOR (optional): clean up → commit: refactor(<scope>): ...
 ```
 
 This is your tracer bullet — proves the path works end-to-end.
@@ -93,9 +93,9 @@ This is your tracer bullet — proves the path works end-to-end.
 For each remaining behavior:
 
 ```
-RED:    Write next test → fails
-GREEN:  Minimal code to pass → passes
-COMMIT: git commit -m "<type>(<scope>): <behavior description>"
+RED:    Write next test → fails → commit: test(<scope>): ...
+GREEN:  Minimal code to pass → passes → commit: feat|fix(<scope>): ...
+REFACTOR (optional): → commit: refactor(<scope>): ...  (use commit-message skill for title/body)
 ```
 
 Rules:
@@ -131,7 +131,7 @@ After all tests pass, look for [refactor candidates](refactoring.md):
 
 ### 5. Verify step
 
-After every behavior cycle, run the verify command from `specs/PLAN.md` if one exists for this step. Show evidence before declaring the step done.
+After every behavior cycle, run the verify command from `specs/RELEASE-PLAN.md` if one exists for this step. Show evidence before declaring the step done.
 
 ### 6. Manual Verification Handover
 

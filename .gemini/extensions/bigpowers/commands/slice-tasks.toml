@@ -1,0 +1,2 @@
+description = "Break a plan or PRD into independently-grabbable vertical-slice tasks in specs/TASKS.md. Use after scope-work or plan-release, before plan-work, when user wants implementation tickets or tracer-bullet slices.model: sonnet"
+prompt = "@{commands/prompts/slice-tasks.md}"

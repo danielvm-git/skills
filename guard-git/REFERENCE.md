@@ -1,5 +1,17 @@
 # Git guardrails — reference
 
+## Secret patterns (audit + pre-commit)
+
+Agents must not commit files containing:
+
+- `sk-` (OpenAI API keys)
+- `ghp_` / `gho_` (GitHub tokens)
+- `AKIA` (AWS access key id)
+- `xoxb-` (Slack bot tokens)
+- `-----BEGIN` private keys
+
+Use `audit-code` supply-chain checklist before commit. Consider `git-secrets` or custom pre-commit hook in target projects.
+
 ## Copy layout
 
 The main script is `pre-tool-use.sh`.
