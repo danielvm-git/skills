@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/danielvm-git/bigpowers/compare/v1.2.0...v1.2.1) (2026-05-31)
+
+
+### Bug Fixes
+
+* **ci:** verify sync artifacts instead of bot push to main ([663e226](https://github.com/danielvm-git/bigpowers/commit/663e22627eaa5b759a8d057fca634e5408dbb331))
+
 # [1.2.0](https://github.com/danielvm-git/bigpowers/compare/v1.1.2...v1.2.0) (2026-05-31)
 
 
