@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/danielvm-git/bigpowers/compare/v1.1.1...v1.1.2) (2026-05-31)
+
+
+### Bug Fixes
+
+* **ci:** add contents:write permission and bump checkout to v4 in sync workflow ([f684bcd](https://github.com/danielvm-git/bigpowers/commit/f684bcd4b3ef5b8e3a206c43d79b56463a8acae7))
+
 ## [1.1.1](https://github.com/danielvm-git/bigpowers/compare/v1.1.0...v1.1.1) (2026-05-31)
 
 
