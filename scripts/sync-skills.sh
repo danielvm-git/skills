@@ -142,3 +142,4 @@ echo "  → .gemini/extensions/bigpowers/commands/ (Slash Commands)"
 echo "  → .gemini/extensions/bigpowers/gemini-extension.json"
 echo "  → opencode.json (CLAUDE.md + CONVENTIONS.md instructions)"
 [[ -n "$OPN_TARGET" ]] && echo "  → bigpowers-opencode: $opencode_count skills"
+exit 0
