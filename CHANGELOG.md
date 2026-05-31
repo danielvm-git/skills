@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/danielvm-git/bigpowers/compare/v1.2.1...v1.2.2) (2026-05-31)
+
+
+### Bug Fixes
+
+* **ci:** deterministic sync verify and release artifact hooks ([9370e35](https://github.com/danielvm-git/bigpowers/commit/9370e351a5b1f290de4297919d4d547bd9f64a27))
+
 ## [1.2.1](https://github.com/danielvm-git/bigpowers/compare/v1.2.0...v1.2.1) (2026-05-31)
 
 
