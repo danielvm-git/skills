@@ -94,13 +94,41 @@ jq -n --arg name "bigpowers" \
       --arg desc "$skill_count+ $pkg_desc" \
       '{name: $name, version: $version, description: $desc}' > "$GEMINI_MANIFEST"
 
-# 4. Write OpenCode configuration: opencode.json
+# 4. Write OpenCode configuration: opencode.json (minimal project-level config)
+# Skills are loaded on-demand via opencode's native skill tool, not instructions.
+# Full opencode integration lives in the bigpowers-opencode repo.
 {
   echo "{"
   echo "  \"\$schema\": \"https://opencode.ai/config.json\","
-  echo "  \"instructions\": [\".cursor/rules/*.mdc\"]"
+  echo "  \"instructions\": [\"CLAUDE.md\", \"CONVENTIONS.md\"]"
   echo "}"
 } > "$REPO_ROOT/opencode.json"
+
+# 5. Sync to bigpowers-opencode repo (if --opencode path is provided)
+OPN_TARGET=""
+for arg in "$@"; do
+  case "$arg" in
+    --opencode=*) OPN_TARGET="${arg#*=}" ;;
+    --opencode)   shift; OPN_TARGET="$1" ;;
+  esac
+done
+
+if [[ -n "$OPN_TARGET" ]] && [[ -d "$OPN_TARGET" ]]; then
+  echo ""
+  echo "Syncing skills to opencode repo: $OPN_TARGET"
+  OPN_SKILLS="$OPN_TARGET/skills"
+  mkdir -p "$OPN_SKILLS"
+  opencode_count=0
+  for skill_dir in "$REPO_ROOT"/*/; do
+    skill_md="$skill_dir/SKILL.md"
+    [[ -f "$skill_md" ]] || continue
+    skill_name=$(basename "$skill_dir")
+    mkdir -p "$OPN_SKILLS/$skill_name"
+    cp "$skill_md" "$OPN_SKILLS/$skill_name/SKILL.md"
+    opencode_count=$((opencode_count + 1))
+  done
+  echo "  → $opencode_count skills copied to $OPN_SKILLS/"
+fi
 
 # Regenerate lexical skill index for search-skills
 if [[ -x "$REPO_ROOT/scripts/build-skill-index.sh" ]]; then
@@ -112,4 +140,5 @@ echo "  → .cursor/rules/ ($skill_count .mdc files)"
 echo "  → .gemini/extensions/bigpowers/skills/ (Agent Skills)"
 echo "  → .gemini/extensions/bigpowers/commands/ (Slash Commands)"
 echo "  → .gemini/extensions/bigpowers/gemini-extension.json"
-echo "  → opencode.json"
+echo "  → opencode.json (CLAUDE.md + CONVENTIONS.md instructions)"
+[[ -n "$OPN_TARGET" ]] && echo "  → bigpowers-opencode: $opencode_count skills"
