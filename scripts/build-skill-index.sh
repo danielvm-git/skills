@@ -18,8 +18,8 @@ mkdir -p "$(dirname "$OUT")"
     [[ -f "$skill_md" ]] || continue
     name=$(awk '/^---/{f++} f==1 && /^name:/{print; exit}' "$skill_md" | sed 's/^name:[[:space:]]*//')
     model=$(awk '/^---/{f++} f==1 && /^model:/{print; exit}' "$skill_md" | sed 's/^model:[[:space:]]*//')
-    desc=$(awk '/^---/{f++} f==1 && /^description:/{p=1} p && !/^---/{print}' "$skill_md" \
-      | sed 's/^description:[[:space:]]*//' | tr -d '\n' | sed 's/|/\\|/g' | cut -c1-200)
+    desc=$(awk '/^---/{f++} f==1 && /^description:/{sub(/^description:[[:space:]]*/,""); print; exit}' "$skill_md" \
+      | tr -d '\n' | sed 's/|/\\|/g' | LC_ALL=C head -c 200)
     [[ -z "$name" ]] && continue
     echo "| $name | ${model:-sonnet} | $desc |"
   done

@@ -19,21 +19,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Sync skills
-        run: bash scripts/sync-skills.sh
-
-      - name: Verify generated artifacts are committed
+      - name: Sync skills and verify artifacts committed
         run: |
+          bash scripts/sync-skills.sh
           git diff --exit-code \
             .cursor/rules \
             .gemini/extensions/bigpowers/skills \
-            .gemini/extensions/bigpowers/commands || {
-            echo "::error::Skill artifacts out of date. Run: bash scripts/sync-skills.sh && git add -A && git commit"
-            git diff --stat .cursor/rules .gemini/extensions/bigpowers/skills .gemini/extensions/bigpowers/commands
-            exit 1
-          }
-          bash scripts/build-skill-index.sh
-          git diff --exit-code specs/SKILL-SEARCH-INDEX.md || {
-            echo "::error::SKILL-SEARCH-INDEX.md out of date. Run: bash scripts/sync-skills.sh && git commit"
+            .gemini/extensions/bigpowers/commands \
+            specs/SKILL-SEARCH-INDEX.md || {
+            echo "::error::Generated artifacts out of date. Run: bash scripts/sync-skills.sh && git add -A && git commit"
+            git diff --stat .cursor/rules .gemini/extensions/bigpowers/skills .gemini/extensions/bigpowers/commands specs/SKILL-SEARCH-INDEX.md
             exit 1
           }
