@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/danielvm-git/bigpowers/compare/v1.2.2...v1.2.3) (2026-05-31)
+
+
+### Bug Fixes
+
+* **ci:** portable SKILL-SEARCH-INDEX generation for Linux runners ([da6db2c](https://github.com/danielvm-git/bigpowers/commit/da6db2c500a8b5562f458fbbc9a4d5b071843c0d))
+
 ## [1.2.2](https://github.com/danielvm-git/bigpowers/compare/v1.2.1...v1.2.2) (2026-05-31)
 
 
