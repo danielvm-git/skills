@@ -1,3 +1,17 @@
+# [1.1.0](https://github.com/danielvm-git/bigpowers/compare/v1.0.0...v1.1.0) (2026-05-31)
+
+
+### Bug Fixes
+
+* **ci:** pass NODE_AUTH_TOKEN for setup-node npmrc auth ([03d58ee](https://github.com/danielvm-git/bigpowers/commit/03d58ee1c9a6b4f7c6c34f822f98363e1493f93e))
+
+
+### Features
+
+* **skills:** add and update a large number of skills ([a51d802](https://github.com/danielvm-git/bigpowers/commit/a51d802ccb1ebcd327e6ff7ef9d7e1471d62ca8e))
+* **skills:** add Project README artifact type to write-document ([43f9f84](https://github.com/danielvm-git/bigpowers/commit/43f9f8473f221374ba8bfe326f8bf604cc213d7e))
+* **workflow:** add solo git profile with land-branch.sh ([1840cd0](https://github.com/danielvm-git/bigpowers/commit/1840cd0011fc522825b72bb10a3f8d16886d902e))
+
 # 1.0.0 (2026-05-23)
 
 
